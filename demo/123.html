@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+		<title></title>
+		<style type="text/css">
+			body,
+			p,
+			div {
+				padding: 0;
+				margin: 0;
+			}
+			
+			body {
+				background: #f0f0f0;
+			}
+			
+			*,
+			:after,
+			:before {
+				-webkit-box-sizing: border-box;
+				box-sizing: border-box;
+			}
+			
+			.header {
+				padding: 1rem;
+				background: #FFFFFF;
+				box-shadow: 0px 1px 4px #909090;
+			}
+			
+			.serch {
+				position: relative;
+				width: 70%;
+			}
+			
+			.serch input {
+				border: 1px solid #CDCDCD;
+				border-radius: 5px;
+				height: 100%;
+				width: 100%;
+				padding: 1rem;
+				font-size: 1rem;
+			}
+			
+			.serch img {
+				position: absolute;
+				right: 10px;
+				top: 10px;
+				width: 28px;
+			}
+			
+			.cont {
+				margin: 1rem;
+				padding: 1rem;
+				box-shadow: 0px 1px 4px #909090;
+				background: #FFFFFF;
+			}
+			
+			.cont img {
+				width: 100%;
+			}
+			
+			.cont p.title {
+				font-weight: bold;
+				line-height: 1.4rem;
+			}
+			
+			.music {
+				position: absolute;
+				right: 1rem;
+				top: 1rem;
+				width: 25%;
+			}
+			
+			.music i {
+				position: absolute;
+				top: 1rem;
+				color: #CDCDCD;
+				font-style: normal;
+				right: 0;
+			}
+			
+			.play-cont {
+				width: 50px;
+				height: 50px;
+				display: inline-block;
+				border: 2px solid #3cc8c0;
+				border-radius: 50%;
+				padding: 1rem;
+			}
+			
+			.music .paly {
+				background: url(img/paly.jpg) 50% no-repeat;
+				background-size: 70%;
+			}
+			
+			.music .pause {
+				background: url(img/pause.jpg) 50% no-repeat;
+				background-size: 70%;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="header">
+			<div class="serch">
+				<input type="" name="" id="serch" value="" placeholder="input number" />
+				<img src="img/iconfont-sousuo.png" />
+			</div>
+			<div class="music">
+				<audio src="01-dead-wrong-intro.mp3" preload="auto" id="audio"></audio>
+				<div class="play-cont pause">
+				</div><i class="dura">00:00</i>
+			</div>
+		</div>
+		<div class="cont">
+			<img src="img/12121.jpg" />
+			<p class="title">Welcome to the Audio Tour of Tashilhunpo Monastery in Tibet</p>
+			<p>Tashilhunpo Monastery is situated in Shigatse. It was founded in 1447 by the First Dalai Lama Gendun Drub, a direct disciple of Tsongkhapa, the founder of the Gelukpa School of Tibetan Buddhism. Throughout its history, Tashilhunpo has gone through
+				different stages of expansion. During the time of the fourth Panchen Lama Lobsang Chogyen the monastery underwent major expansion work and thereafter has undergone further expansions by successive Panchen Lamas, before reaching the size and scale
+				that wesee today. Tashilhunpo is one of the six major monasteries belonging to the Gelukpa School of Tibetan Buddhism and it is the monasti c seat of the successive Panchen Lamas. Occupying an area of 700,000 square meters and a built-up area of 300,000
+				square meters, this world renowned holy place of Tibetan Buddhism is comprised of splendid and magnificent temples, shrines, tomb stupas, courtyards and simple yet elegant residences for monks.</p>
+		</div>
+	</body>
+	<script src="//cdn.bootcss.com/zepto/1.1.6/zepto.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript">
+		$('.music').click(function() {
+			var audioEle = document.getElementById("audio");
+			if ($('.play-cont').hasClass('paly')) {
+				$('.play-cont').removeClass('paly').addClass('pause')
+				audioEle.play(); //播放 
+			} else {
+				$('.play-cont').removeClass('pause').addClass('paly')
+				audioEle.pause(); // 
+			}
+		})
+		$('#serch').keyup(function() {
+			$('#ss').html($(this).val());
+			abc($(this).val());
+		});
+
+		function abc(da) {
+			var audioEle = document.getElementById("audio");
+			var html = "";
+			for (var i = 0; i < retData.result.length; i++) {
+				if (da == retData.result[i].classification) {
+					html += '<img src="' + retData.result[i].img + '"><p class="title">' + retData.result[i].title + '</p><p>' + retData.result[i].info + '</p>';
+					$('#audio').attr('src', retData.result[i].mp3);
+					audioEle.play(); //播放 
+				}
+				if (!isNaN(audioEle.duration)) {
+					var surplus = audioEle.duration;
+					var surplusMin = parseInt(surplus / 60);
+					var surplusSecond = parseInt(surplus % 60);
+					if (surplusSecond < 10) {
+						surplusSecond = '0' + surplusSecond;
+					};
+					$('.dura').html(surplusMin + ":" + surplusSecond);
+				}
+			}
+			if (html == "") {
+				$('.cont').html('NO DATA');
+				$('.dura').html('');
+			} else {
+				$('.cont').html(html);
+			}
+		}
+		var retData = {
+			"result": [{
+				"classification": 110,
+				"img": "img/rw_1.png",
+				"mp3": "01-dead-w2rong-intro.mp3",
+				"title": "藏民族节日“白拉姆”节",
+				"info": "导读：藏历十月十五日是关于爱情的藏族传统节日——白拉姆节。在这一天，藏族妇女们都会盛装来到大昭寺，烧香、磕头、朝拜白拉姆女神，保佑..."
+			}, {
+				"classification": 111,
+				"img": "img/rw_2.png",
+				"mp3": "01-dead-wrong-intro.mp3",
+				"title": "藏民族节日“白拉姆”节",
+				"info": "导读：一年一度的雪顿节已拉开了大幕，拉萨雪顿节随着时光的流逝，雪顿节的内容也有所增加,过林卡、看藏戏表演就是世俗百姓最为惬意的内容。"
+			}, {
+				"classification": 112,
+				"img": "img/rw_3.png",
+				"mp3": "01-dead-wrong-intro.mp3",
+				"title": "藏民族节日“白拉姆”节",
+				"info": "导读：一年一度的雪顿节已拉开了大幕，拉萨雪顿节随着时光的流逝，雪顿节的内容也有所增加,过林卡、看藏戏表演就是世俗百姓最为惬意的内容。."
+			}]
+		};
+	</script>
+
+</html>
