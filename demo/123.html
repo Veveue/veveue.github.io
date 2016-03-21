@@ -140,8 +140,27 @@
 			$('#ss').html($(this).val());
 			abc($(this).val());
 		});
+		window.onload = function() {
+			var _url = window.location.href;
+
+			function parse_url(_url) {
+				var pattern = /(\w+)=(\w+)/ig;
+				var parames = {};
+				_url.replace(pattern, function(a, b, c) {
+					parames[b] = c;
+				});
+				return parames;
+			}
+			var parames = parse_url(_url);
+			var id = parames['id'];
+			if (id != undefined) {
+				$('#serch').val(id);
+				abc(id);
+			}
+		}
 
 		function abc(da) {
+			console.log(da);
 			var audioEle = document.getElementById("audio");
 			var html = "";
 			for (var i = 0; i < retData.result.length; i++) {
@@ -170,22 +189,28 @@
 		var retData = {
 			"result": [{
 				"classification": 110,
-				"img": "img/rw_1.png",
-				"mp3": "01-dead-w2rong-intro.mp3",
-				"title": "藏民族节日“白拉姆”节",
-				"info": "导读：藏历十月十五日是关于爱情的藏族传统节日——白拉姆节。在这一天，藏族妇女们都会盛装来到大昭寺，烧香、磕头、朝拜白拉姆女神，保佑..."
+				"img": "img/111.jpg",
+				"mp3": "img/01-dead-wrong-intro.mp3",
+				"title": "Beautiful Shichahai",
+				"info": '<p>The use of the "West Lake spring, summer Qinhuai, Dongting autumn to praise Shichahai charm. Shichahai beautiful scenery, pleasant scenery, known as the "northern rivers and lakes"".</p>'
 			}, {
 				"classification": 111,
-				"img": "img/rw_2.png",
-				"mp3": "01-dead-wrong-intro.mp3",
-				"title": "藏民族节日“白拉姆”节",
-				"info": "导读：一年一度的雪顿节已拉开了大幕，拉萨雪顿节随着时光的流逝，雪顿节的内容也有所增加,过林卡、看藏戏表演就是世俗百姓最为惬意的内容。"
+				"img": "img/112.jpg",
+				"mp3": "img/01-dead-wrong-intro.mp3",
+				"title": "Yinding Bridge",
+				"info": "<p>After the bridge, because the shape such as silver, it was this name. The silver bridge can enjoy the beauty of Xishan, in the silver bridge you can feel the breath of history.</p>"
 			}, {
 				"classification": 112,
-				"img": "img/rw_3.png",
-				"mp3": "01-dead-wrong-intro.mp3",
-				"title": "藏民族节日“白拉姆”节",
-				"info": "导读：一年一度的雪顿节已拉开了大幕，拉萨雪顿节随着时光的流逝，雪顿节的内容也有所增加,过林卡、看藏戏表演就是世俗百姓最为惬意的内容。."
+				"img": "img/113.jpg",
+				"mp3": "img/01-dead-wrong-intro.mp3",
+				"title": "Prince Gong Palace",
+				"info": "<p>And the story must have a lot of people have heard of him, he is fabulously rich, wealthy. Want to know the University of the gold and silver jewelry are hidden in what? Want to know how the University of the houses hidden secret? Prince Gong palace to take a look!</p>"
+			}, {
+				"classification": 113,
+				"img": "img/114.jpg",
+				"mp3": "img/01-dead-wrong-intro.mp3",
+				"title": "Dazzling bar street",
+				"info": "<p>Ancient cultural shops, snacks Street and bar, with the increasing number of tourists, these places for people to leisure and entertainment gradually appear, to Shichahai to add an unlimited modern breath and vitality.</p>"
 			}]
 		};
 	</script>
