@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+
+	<head>
+		<meta charset="UTF-8" />
+		<title>Document</title>
+		<script src="assets/js/jquery.min.js"></script>
+		<style type="text/css">
+			.avc{
+				width: 100px;
+				height: 100px;
+				background: #000000;
+			}
+		</style>
+	</head>
+
+	<body>
+		<div class="avc">
+			<audio>
+				<source src="mp3/q.mp3"> </audio>
+		</div>
+
+	</body>
+	<script>
+		$(function() {
+			$(".avc").on("click", function() {
+				var audio = $(this).find("audio")[0];
+				audio.play();
+				//				playCotrol(audio);
+			})
+			$(".avc").on("click", function() {
+				var audioStatus = "paused";
+				var audio = $("audio")[0];
+				audio.addEventListener("playing", function() {
+					audioStatus = "playing";
+				});
+				audio.addEventListener("pause", function() {
+					audioStatus = "paused";
+					audio.pause();
+				});
+			})
+		})
+	</script>
+
+</html>

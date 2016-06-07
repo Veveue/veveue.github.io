@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+        <title></title>
+        <script src="js/mui.min.js"></script>
+        <link href="css/mui.min.css" rel="stylesheet" />
+        <script type="text/javascript" charset="utf-8">
+            mui.init();
+        </script>
+    </head>
+
+    <body>
+        <button onclick="addEvent()"> 插入事件</button>
+    </body>
+    <script>
+        var calanderURL = "content://com.android.calendar/calendars";
+        var calanderEventURL = "content://com.android.calendar/events";
+        var calanderRemiderURL = "content://com.android.calendar/reminders";
+        var calId;
+
+        function addEvent() {
+                var Cursor = plus.android.importClass("android.database.Cursor");
+                var Uri = plus.android.importClass("android.net.Uri");
+                var Calendar = plus.android.importClass("java.util.Calendar");
+                var main = plus.android.runtimeMainActivity();
+                var userCursor = plus.android.invoke(main.getContentResolver(), "query", Uri.parse(calanderURL), null, null, null, null);
+                if (plus.android.invoke(userCursor, "getCount") <= 0) {
+                    console.log("添加账号" + plus.android.invoke(userCursor, "getCount"));
+                    initCalendars();
+                } else {
+                    console.log("开始插入：" + plus.android.invoke(userCursor, "getCount"));
+                    plus.android.invoke(userCursor, "moveToLast");
+                    calId = plus.android.invoke(userCursor, "getString", plus.android.invoke(userCursor, "getColumnIndex", "_id"));
+                    var ContentValues = plus.android.importClass("android.content.ContentValues");
+                    var events = new ContentValues();
+                    events.put("title", "测试中==》呵呵");
+                    events.put("description", "Frankie受空姐邀请,今天晚上10点以后将在Sheraton交流.lol~");
+                    // 插入账户
+                    events.put("calendar_id", calId);
+                    console.log(calId);
+                    events.put("eventLocation", "地球-华夏");
+                    var mCalendar = Calendar.getInstance();
+                    plus.android.invoke(mCalendar, "set", Calendar.HOUR_OF_DAY, 11);
+                    plus.android.invoke(mCalendar, "set", Calendar.MINUTE, 0);
+                    var start = plus.android.invoke(plus.android.invoke(mCalendar, "getTime"), "getTime");
+                    var end = plus.android.invoke(plus.android.invoke(mCalendar, "getTime"), "getTime");
+                    events.put("dtstart", start);
+                    events.put("dtend", end);
+                    events.put("hasAlarm", 1);
+                    events.put("eventTimezone", "Asia/Shanghai"); // 这个是时区，必须有，
+                    // 添加事件  
+                    var newEvent = plus.android.invoke(plus.android.runtimeMainActivity().getContentResolver(), "insert", Uri.parse(calanderEventURL), events);
+                    // 事件提醒的设定
+                    var id = plus.android.invoke(newEvent, "getLastPathSegment");
+                    var values = new ContentValues();
+                    values.put("event_id", id);
+                    // 提前10分钟有提醒
+                    values.put("minutes", "10");
+                    values.put("method", "1");
+                    plus.android.invoke(main.getContentResolver(), "insert", Uri.parse(calanderRemiderURL), values);
+                    mui.toast("插入事件成功，可打开本地日历查看");
+                }
+            }
+            //添加账户
+
+        function initCalendars() {
+            var TimeZone=plus.android.importClass("java.util.TimeZone");
+            var timeZone = TimeZone.getDefault();
+            var  ContentValues=plus.android.importClass("android.content.ContentValues");   
+            var value = new ContentValues();
+            var Calendars=plus.android.importClass("android.provider.CalendarContract.Calendars");
+            value.put("name", "yy");
+            value.put("account_name", "hehe@gmail.com");
+            value.put("account_type", "com.android.exchange");
+            value.put("calendar_displayName", "mytt");
+            value.put("visible", 1);
+            value.put("calendar_color", -9206951);
+            value.put("calendar_access_level","700");
+            value.put("sync_events", 1);
+            value.put("calendar_timezone",plus.android.invoke(timeZone, "getID"));
+            value.put("ownerAccount","hehe@gmail.com");
+            value.put("canOrganizerRespond", 0);
+            var Uri=plus.android.importClass("android.net.Uri");
+            var calendarUri=Uri.parse("content://com.android.calendar/calendars");
+            var buildUpon = plus.android.invoke(calendarUri, "buildUpon");
+            var CalendarContract = plus.android.importClass("android.provider.CalendarContract");
+            plus.android.invoke(buildUpon, "appendQueryParameter", CalendarContract.CALLER_IS_SYNCADAPTER, "true");
+            plus.android.invoke(buildUpon, "appendQueryParameter", "account_name", "hehe@gmail.com");
+            plus.android.invoke(buildUpon, "appendQueryParameter", "account_type", "com.android.exchange");
+            calendarUri = plus.android.invoke(buildUpon, "build");
+            plus.android.invoke(plus.android.runtimeMainActivity().getContentResolver(), "insert", calendarUri, value);
+            mui.toast("添加账号成功");
+        }
+    </script>
+
+</html>

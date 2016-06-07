@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="musicApp" ng-controller="musicController">
+
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+
+		<title>Mobiscroll Music Player</title>
+
+		<script type="text/javascript" src="js/jquery.min.js"></script>
+		<script type="text/javascript" src="js/angular.min.js"></script>
+		<script type="text/javascript" src="js/angular-animate.min.js"></script>
+
+		<link href="css/mobiscroll.custom-2.17.1.min.css" rel="stylesheet" type="text/css" />
+		<script type="text/javascript" src="js/mobiscroll.custom-2.17.1.min.js"></script>
+		<link href='css/music.css' rel='stylesheet' type='text/css' />
+
+		<script type="text/javascript">
+			var MS = MS || {};
+			            MS.mobile = true;
+		</script>
+		<script type="text/javascript">
+			MS.demo = 'music';
+			            MS.theme = 'mobiscroll';
+			            MS.context1 = 'body';
+			            MS.context2 = 'body' ;
+		</script>
+		<script type="text/javascript" src="js/music.js"></script>
+
+	</head>
+
+	<body class="demo-music mobile external-demo music-demo">
+
+		<div ng-class="{'music-demo-noscroll' : showPlayer}" class="demo-phone-screen wrapper music-{{theme}}">
+
+			<div id="message" class="music-message">
+				<div class="music-message-i">{{message}}</div>
+			</div>
+
+			<div class="music-detail-cont" ng-class="{'music-show-player': showPlayer}" mobiscroll-form="{ theme: theme }" no-scroll>
+				<button class="mbsc-btn-flat music-back" data-icon="material-arrow-back" ng-click="onBackPress()"></button>
+
+				<div class="music-detail">
+					<div class="music-detail-img" ng-style="{'background-image': 'url(' + (currentItem.img) + ')'}"></div>
+					<div class="music-control" mobiscroll-form="{ theme: theme }">
+						<div class="music-load mbsc-ic mbsc-ic-loop2" ng-hide="started"></div>
+						<div class="music-desc">
+							<h4 class="music-artist">{{ currentItem.artist }}</h4>
+							<p class="music-track mbsc-desc">{{ currentItem.track }}</p>
+							<div class="music-share-cont">
+								<button class="music-share-btn mbsc-btn-flat" ng-class="currentItem.like ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '') : 'music-btn-disabled'" ng-click="toggleLike()" data-icon="heart"></button>
+								<button class="music-share-btn mbsc-btn mbsc-btn-flat" ng-click="widgetInstance.show()" data-icon="share"></button>
+							</div>
+						</div>
+						<label on-slider-touch>
+							<span class="music-time music-current-time">{{ currentItem.currTime }}</span>
+							<span class="music-time music-end-time">{{ currentItem.length }}</span>
+							<input type="range" step=".5" class="music-progress" ng-model="currentItem.sliderVal" value="0" ng-change="sliderChange(currentItem.sliderVal)" max="100" mobiscroll-slider="{ theme: theme, live: false }" />
+						</label>
+
+						<div class="music-handler">
+							<button class="music-handler-btn music-repeat-btn mbsc-btn-flat" ng-class="repeat ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '')  : 'music-btn-disabled'" ng-click="toggleRepeat()" data-icon="material-repeat"></button>
+							<label>
+								<input name="music-btns-{{ $index }}" type="radio" value="prev" ng-model="currentItem.status" data-role="segmented" data-icon="material-skip-previous">
+							</label>
+							<label ng-style="{'display': showPause ? 'none' : 'table-cell'}">
+								<input name="music-btns-{{ $index }}" type="radio" value="play" ng-model="currentItem.status" data-role="segmented" data-icon="material-play-arrow">
+							</label>
+							<label ng-style="{'display': (!showPause ? 'none' : 'table-cell')}">
+								<input name="music-btns-{{ $index }}" type="radio" value="pause" ng-model="currentItem.status" data-role="segmented" data-icon="material-pause">
+							</label>
+							<label>
+								<input name="music-btns-{{ $index }}" type="radio" value="stop" ng-model="currentItem.status" data-role="segmented" data-icon="material-stop">
+							</label>
+							<label>
+								<input name="music-btns-{{ $index }}" type="radio" value="next" ng-model="currentItem.status" data-role="segmented" data-icon="material-skip-next">
+							</label>
+
+							<button class="music-handler-btn music-mix-btn mbsc-btn-flat" ng-class="shuffle ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '')  : 'music-btn-disabled'" ng-click="toggleShuffle()" data-icon="material-shuffle"></button>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="demo-phone-scroll demo-scroll">
+				<div class="music-demo-cont">
+
+					<div style="min-width: 178px; max-width: 178px;" class="music-social-cont" mobiscroll-widget mobiscroll-instance="widgetInstance" mobiscroll-options="widgetOptions">
+						<div mbsc-enhance>
+							<p class="social-header">Share your stream on</p>
+							<div class="social-btn">
+								<div class="social-btn-cont">
+									<button class="music-share-btn mbsc-btn-flat fb-btn" data-icon="ion-social-facebook" ng-click="notify('Shared on Facebook'); widgetInstance.hide();"></button>
+								</div>
+								<div class="social-btn-cont">
+									<button class="music-share-btn mbsc-btn-flat twitter-btn" data-icon="fa-twitter" ng-click="notify('Shared on Twitter'); widgetInstance.hide();"></button>
+								</div>
+							</div>
+							<div class="social-btn">
+								<div class="social-btn-cont">
+									<button class="music-share-btn mbsc-btn-flat google-btn" data-icon="fa-google-plus" ng-click="notify('Shared on Google+'); widgetInstance.hide();"></button>
+								</div>
+								<div class="social-btn-cont">
+									<button class="music-share-btn mbsc-btn-flat email-btn" data-icon="ion-email" ng-click="notify('Shared via email'); widgetInstance.hide();"></button>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<div class="music-cont">
+						<div class="music-list-player">
+							<div class="music-detail-img" ng-style="{'background-image': 'url(' + (currentItem.img) + ')'}" ng-click="onPictureTap()"></div>
+							<div class="music-control" mobiscroll-form="{ theme: theme }">
+								<div class="music-load mbsc-ic mbsc-ic-loop2" ng-hide="started"></div>
+								<div class="music-desc">
+									<h4 class="music-artist">{{ currentItem.artist }}</h4>
+									<p class="music-track mbsc-desc">{{ currentItem.track }}</p>
+									<div class="music-share-cont">
+										<button class="music-share-btn mbsc-btn-flat" ng-class="currentItem.like ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '') : 'music-btn-disabled'" ng-click="toggleLike()" data-icon="heart"></button>
+										<button class="music-share-btn mbsc-btn mbsc-btn-flat" ng-click="widgetInstance.show()" data-icon="share"></button>
+									</div>
+								</div>
+								<label on-slider-touch>
+									<span class="music-time music-current-time">{{ currentItem.currTime }}</span>
+									<span class="music-time music-end-time">{{ currentItem.length }}</span>
+									<input type="range" step=".5" class="music-progress" ng-model="currentItem.sliderVal" value="0" ng-change="sliderChange(currentItem.sliderVal)" max="100" mobiscroll-slider="{theme: theme, live: false}" />
+								</label>
+
+								<div class="music-handler">
+									<button class="music-handler-btn music-repeat-btn mbsc-btn-flat" ng-class="repeat ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '')  : 'music-btn-disabled'" ng-click="toggleRepeat()" data-icon="material-repeat"></button>
+									<label>
+										<input name="music-btns-lm" type="radio" value="prev" ng-model="currentItem.status" data-role="segmented" data-icon="material-skip-previous">
+									</label>
+									<label ng-style="{'display': showPause ? 'none' : 'table-cell'}">
+										<input name="music-btns-lm" type="radio" value="play" ng-model="currentItem.status" data-role="segmented" data-icon="material-play-arrow">
+									</label>
+									<label ng-style="{'display': (!showPause ? 'none' : 'table-cell')}">
+										<input name="music-btns-lm" type="radio" value="pause" ng-model="currentItem.status" data-role="segmented" data-icon="material-pause">
+									</label>
+									<label>
+										<input name="music-btns-lm" type="radio" value="stop" ng-model="currentItem.status" data-role="segmented" data-icon="material-stop">
+									</label>
+									<label>
+										<input name="music-btns-lm" type="radio" value="next" ng-model="currentItem.status" data-role="segmented" data-icon="material-skip-next">
+									</label>
+									<button class="music-handler-btn music-mix-btn mbsc-btn-flat" ng-class="shuffle ? (theme.indexOf('wp') > -1 ? 'music-wp-active' : '')  : 'music-btn-disabled'" ng-click="toggleShuffle()" data-icon="material-shuffle"></button>
+								</div>
+							</div>
+						</div>
+
+						<ul id="musiclist" style="display:none;" mobiscroll-listview="listviewOptions" mobiscroll-data="music">
+							<li class="music-item">
+								<img ng-src="{{item.img}}" class="music-img" />
+								<h4>{{ item.artist }}</h4>
+								<p>{{ item.track }}</p>
+								<span class="music-length">
+                            <span ng-if="item.status != 'play' && item.status != 'pause'">{{ item.length }}</span>
+								<span ng-if="item.status == 'play' || item.status == 'pause'" class="mbsc-ic " ng-class="item.status == 'play' ? 'mbsc-ic-material-equalizer' : 'mbsc-ic-material-pause'"></span>
+								</span>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

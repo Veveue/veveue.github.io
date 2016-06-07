@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html ng-app="scotchApp"> 
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+		<title>车载WIFI</title>
+		<link rel="stylesheet" type="text/css" href="css/reset.css" />
+		<link rel="stylesheet" type="text/css" href="css/new_file.css" />
+		<script src="js/angular.min.js"></script>
+		<script src="js/angular-route.js"></script>
+		<script src="app.js"></script>
+		<script src="http://apps.bdimg.com/libs/jquery/2.1.4/jquery.js" type="text/javascript" charset="utf-8"></script>
+	
+	</head>
+
+	<body ng-controller="mainController">
+
+		<div id="main">
+			<div ng-view></div>
+		</div>
+
+		<div class="grid-music-container f-usn">
+			<div class="m-music-play-wrap-1">
+				<div class="m-now-info">
+					<div class="m-now-controls">
+						<div class="u-control u-process">
+							<span class="buffer-process"></span>
+							<span class="current-process"></span>
+						</div>
+						<div class="u-control u-volume">
+							<div class="volume-process" data-volume="0.50">
+								<span class="volume-current"></span>
+								<span class="volume-bar"></span>
+								<span class="volume-event"></span>
+							</div>
+							<a class="volume-control"></a>
+						</div>
+					</div>
+				</div>
+				<div id="player">
+					<div class="player url m-play-controls">
+						<div class="u-cover"></div>
+						<div class="info">
+							<div class="m-now-info">
+								<span class="title u-music-title"><strong></strong></span>
+								<span class="name"><span class="author u-music-title"><small></small></span>&nbsp;-&nbsp;<span class="cur u-control u-time"><div class="u-control u-time">00:00</div></span></span>
+							</div>
+						</div>
+						<a class="u-play-btn prev" title="上一曲"></a>
+						<!--<a class="u-play-btn mode mode-list current" title="列表循环"></a>
+						<a class="u-play-btn mode mode-random" title="随机播放"></a>
+						<a class="u-play-btn mode mode-single" title="单曲循环"></a>-->
+
+						<div class="download need-active downshut"></div>
+						<div class="u-play-btn ctrl-play play1 need-active"></div>
+						<div class="next need-active u-play-btn"></div>
+					</div>
+				</div>
+				<div class="music-cont">
+					<div class="m-play-controls">
+						<a class="play-most play-most-l1 u-play-btn mode mode-random ac" title="随机播放">随机播放</a>
+						<a class="play-most play-most-l2 u-play-btn mode mode-list" title="列表循环" style="display: none;">列表循环</a>
+						<a class="play-most play-most-l3 u-play-btn mode mode-single" title="单曲循环" style="display: none;">单曲循环</a>
+					</div>
+				</div>
+				<div class="m-music-list-wrap"></div>
+				<audio id="music" src="" style="display: none;"></audio>
+			</div>
+
+			<script type="text/javascript">
+				$(function() {
+					$(document).on('click', '.m-nav ul li', function() {
+						$(this).addClass('active').siblings().removeClass('active');
+						var index = $('.m-nav ul li').index(this);
+						$('.m-cont').eq(index).show().siblings('.m-cont').hide();
+					});
+					$(document).on('click', '.downshut', function() {
+						if ($('.ac .download').eq(0).attr('src') != null) {
+							location.href = $('.ac .download').attr('src');
+						} else {
+							location.href = $('.ac .download').eq(1).attr('src');
+						}
+					});
+					$(document).on('click', '.download', function(e) {
+						location.href = $(this).attr('src');
+					});
+					$('.m-play-controls a').on('click', function() {
+						if ($(this).index() == '0') {
+							console.log($(this).index());
+							$('.m-play-controls a').show().eq(2).siblings().hide();
+						} else if ($(this).index() == '1') {
+							console.log($(this).index());
+							$('.m-play-controls a').show().eq(3).siblings().hide();
+						} else if ($(this).index() == '2') {
+							$('.m-play-controls a').show().eq(1).siblings().hide();
+						}
+					})
+//					$(document).on('click', '.play-most', function() {
+//						if ($(this).attr('list') == '1') {
+//							$(this).removeClass("play-most-l1").addClass("play-most-l2");
+//							$(this).attr('list', '2');
+//							$(this).next('i').html("列表循环");
+//						} else if ($(this).attr('list') == '2') {
+//							$(this).removeClass("play-most-l1").removeClass("play-most-l2").addClass("play-most-l3");
+//							$(this).attr('list', '3');
+//							$(this).next('i').html("单曲循环");
+//						} else if ($(this).attr('list') == '3') {
+//							$(this).removeClass("play-most-l2").removeClass("play-most-l3").addClass("play-most-l1");
+//							$(this).attr('list', '1');
+//							$(this).next('i').html("随机播放");
+//						}
+//						$('.m-play-controls a').eq($(this).attr('list')).addClass('ac').siblings().removeClass('ac');
+//					});
+				})
+			</script>
+			<script src="js/music-play.js" type="text/javascript" charset="utf-8"></script>
+			<script src="js/musicList.js" type="text/javascript" charset="utf-8"></script> 
+			<script>
+				new SMusic({
+					musicList: musicList
+				});
+				$(document).on('click', '.m-music ul li', function() {
+					var a = [musicList, musicList01, musicList02, musicList03, musicList04, musicList05, musicList06];
+					new SMusic({
+						musicList: a[$(this).index()]
+					});
+				});
+			</script>
+	</body>
+
+</html>

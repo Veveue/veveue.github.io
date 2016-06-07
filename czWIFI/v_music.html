@@ -1,0 +1,182 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<title>随车导游</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="x5-fullscreen" content="true">
+		<meta name="full-screen" content="yes">
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css">
+		<link rel="stylesheet" href="assets/css/wifi.css" />
+		<link rel="stylesheet" href="assets/css/smusic.css" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+		<style>
+			.m-music-list-wrap ul li img {
+				width: 80px;
+				border-radius: 3em;
+			}
+			.grid-music-container .m-play-controls .u-play-btn.prev {
+				background: url(img/rewind_1.png) 0 0 no-repeat;
+				background-size: contain;
+			}
+			.grid-music-container .m-play-controls .u-play-btn.play {
+				background: url(img/pause_1.png) 0 0 no-repeat;
+				background-size: contain;
+			}
+			.grid-music-container .m-play-controls .u-play-btn.paused {
+				background: url(img/play1.png) 0 0 no-repeat;
+				background-size: contain;
+			}
+			.grid-music-container .m-play-controls .u-play-btn.next {
+				background: url(img/fastforward_1.png) 0 0 no-repeat;
+				background-size: contain;
+			}
+			.m-music-list-wrap ul li img.paused {
+				animation-play-state: paused;
+				-webkit-animation-play-state: paused;
+			}
+		</style>
+	</head>
+
+	<body>
+		<!-- Header -->
+		<header data-am-widget="header" class="am-header am-header-default">
+			<h1 class="am-header-title">  <a href="#title-link"><img src="img/logo1.png" />  </a>   </h1>
+		</header>
+
+		<!-- Menu -->
+		<nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas>
+			<a href="#" class="am-menu-toggle">
+				<p type="button" class="am-btn" data-am-modal="{target: '#my-popup'}">
+					音乐<span class="am-icon-caret-down"></span>
+				</p>
+			</a>
+
+		</nav>
+
+		<div class="am-popup" id="my-popup">
+			<div class="am-popup-inner">
+				<div class="am-popup-hd">
+					<h4 class="am-popup-title">选择分类</h4>
+					<span data-am-modal-close class="am-close">&times;</span>
+				</div>
+				<div class="am-popup-bd">
+					<ul>
+						<li><a href="video.html">视频</a></li>
+						<li class="active" data-am-modal-close>音乐</li>
+						<li><a href="video_360.html">360°全景</a></li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Slider -->
+		<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+			<ul class="am-slides">
+				<li>
+					<img src="img/banner_v.jpg">
+				</li>
+				<li>
+					<img src="img/banner_v.jpg">
+				</li>
+			</ul>
+		</div>
+
+		<!-- Navbar -->
+		<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li>
+					<a href="txxm.html?id=1">
+						<img src="img/ico-1.png">
+						<span class="am-navbar-label">贴心小蜜</span>
+					</a>
+				</li>
+				<li>
+					<a href="video.html" class="curr">
+						<img src="img/ico-2.png">
+						<span class="am-navbar-label">视听西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="rwxz.html?id=1">
+						<img src="img/ico-3.png">
+						<span class="am-navbar-label">人文西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="index.html?id=1">
+						<img src="img/ico-4.png">
+						<span class="am-navbar-label">畅游西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="lxwm.html">
+						<img src="img/ico-5.png">
+						<span class="am-navbar-label">联系我们</span>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+
+		<div class="grid-music-container am-panel-group f-usn">
+			<div class="m-music-play-wrap">
+				<div class="u-cover" style="display: none;"></div>
+				<div class="m-now-info" style="display: none;">
+					<h1 class="u-music-title" style="display: none;"><strong>标题</strong><small>歌手</small></h1>
+
+					<div class="m-play-controls">
+						<a class="u-play-btn prev" title="上一曲"></a>
+						<a class="u-play-btn ctrl-play play" title="暂停"></a>
+						<a class="u-play-btn next" title="下一曲"></a>
+						<p style="display: none;">
+							<a class="u-play-btn mode mode-list current" title="列表循环"></a>
+							<a class="u-play-btn mode mode-random" title="随机播放"></a>
+							<a class="u-play-btn mode mode-single" title="单曲循环"></a>
+						</p>
+					</div>
+
+					<div class="m-now-controls">
+						<div class="u-control u-process">
+							<span class="buffer-process"></span>
+							<span class="current-process"></span>
+						</div>
+						<div class="u-control u-time"><span class="currentTime">00:00</span><span class="time">00:00</span></div>
+						<div class="u-control u-volume" style="display: none;">
+							<div class="volume-process" data-volume="0.50" style="display: none;">
+								<span class="volume-current"></span>
+								<span class="volume-bar"></span>
+								<span class="volume-event"></span>
+							</div>
+							<a class="volume-control"></a>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="f-cb">&nbsp;</div>
+			<div class="m-music-list-wrap"></div>
+		</div>
+	</body>
+	<script src="assets/js/musicList.js"></script>
+	<script src="assets/js/smusic.min.js"></script>
+	<script>
+		new SMusic({
+			musicList: musicList
+		});
+		$(".m-now-info").css("display", "block");
+	</script>
+	<script>
+		$(function() {
+			$(".m-music-list-wrap ul li").bind("click", function() {
+				$(".m-music-play-wrap").insertAfter($(this));
+			});
+		});
+	</script>
+
+</html>

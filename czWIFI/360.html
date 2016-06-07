@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
+		<meta content="yes" name="apple-mobile-web-app-status-bar-style">
+		<meta name="x5-fullscreen" content="true">
+		<meta name="full-screen" content="yes">
+		<title>天上西藏-定结县</title>
+		<link rel="stylesheet" href="assets/css/common.css" />
+		<link rel="stylesheet" href="assets/css/map_content.css" />
+	</head>
+
+	<body>
+		<div class="videos_content_pageone">
+			<div id="360map" class="videos_content_360map"></div>
+
+			<div class="videos_content_brief" style="display: none;">
+				<h4>定结县</h4>
+				<div class="videos_content_brief_content">
+					定结县隶属于西藏自治区日喀则市，位于西藏南部、日喀则地区南部、喜玛拉雅山北麓，是西藏自治区边境县之一。面积5461平方公里。定结藏语意为“水底长出”。隶属日喀则，县驻地江嘎。定结县位于喜玛拉雅山北麓湖盆区，地势南北高，中间低。气候为高原温带半干旱季风气候。 </div>
+				<div class="videos_content_brief_control"></div>
+			</div>
+			<div class="map_list" style="display: none;">
+				<div class="map_list_content over">
+					<ul>
+						<li>
+							<!--<a href="index.xml?app=store&act=tibet_article_map360&cid=36&id=1&mid=0"><img src="map360/201412082133268399.jpg" user-data="0"></a>-->
+						</li>
+					</ul>
+				</div>
+			</div>
+			<div class="videos_content_button">
+				<span id="desc"><img src="map360/iconfont-jianjie01.png">&nbsp;简介</span>
+				<span id="more"><img src="map360/iconfont-jianjie01.png">&nbsp;更多</span>
+			</div>
+			<div class="videos_content_360map_bgcontrol"><img src="map360/stop.png" height="25" width="25"></div>
+		</div>
+
+		<script type="text/javascript" src="assets/js/zepto.min.js"></script>
+		<script type="text/javascript" src="assets/js/common.js"></script>
+		<script type="text/javascript" src="assets/js/3d_player.js"></script>
+		<script type="text/javascript">
+			if (ggHasHtml5Css3D() || ggHasWebGL()) {
+				pano = new pano2vrPlayer("360map");
+				skin = new pano2vrSkin(pano);
+				pano.readConfigUrl('360.xml');
+			} else {
+				alert("not support 360view");
+			}
+			var music = "data/files/store_1/map360/201412090929365309.mp3";
+			var player = $('<audio></audio>');
+			if (music != '') {
+				player.attr('src', music);
+			}
+			$('.videos_content_360map_bgcontrol').click(function() {
+				var control_div = $(this);
+				if (player[0].paused) {
+					player[0].play();
+					control_div.html('<img src="map360/play.png" height="25" width="25">');
+				} else {
+					player[0].pause();
+					control_div.html('<img src="map360/stop.png" height="25" width="25">');
+				}
+			});
+			$('#desc').click(function() {
+				$('.videos_content_brief').toggle();
+				$('.map_list').css("display", "none");
+			});
+			$('#more').click(function() {
+				$(this).toggleClass('act');
+				$('.map_list').toggle();
+				$('.videos_content_brief').css("display", "none");
+			})
+		</script>
+
+	</body>
+
+</html>

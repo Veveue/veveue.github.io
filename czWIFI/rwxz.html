@@ -1,0 +1,120 @@
+<!doctype html>
+<html class="no-js">
+
+	<head>
+		<meta charset="utf-8">
+		<title>随车导游-人文西藏</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no,minimal-ui">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta http-equiv="Cache-Control" content="no-siteapp" />
+		<meta name="x5-fullscreen" content="true">
+		<meta name="full-screen" content="yes">
+
+		<link rel="stylesheet" href="assets/css/reset.css" />
+		<link rel="stylesheet" href="assets/css/amazeui.min.css">
+		<link rel="stylesheet" href="assets/css/wifi.css" />
+		<script src="assets/js/jquery.min.js"></script>
+		<script src="assets/js/amazeui.min.js"></script>
+	</head>
+
+	<body>
+		<!-- Header -->
+		<header data-am-widget="header" class="am-header am-header-default">
+			<h1 class="am-header-title">  <a href="#title-link"><img src="img/logo1.png" />  </a>   </h1>
+		</header>
+
+		<!-- Menu -->
+		<nav data-am-widget="menu" class="am-menu  am-menu-offcanvas1" data-am-menu-offcanvas>
+			<a href="#" class="am-menu-toggle">
+				<p type="button" class="am-btn" data-am-modal="{target: '#my-popup'}">
+					<i class="t_n">特色文化</i><span class="am-icon-caret-down"></span>
+				</p>
+			</a>
+		</nav>
+
+		<div class="am-popup" id="my-popup">
+			<div class="am-popup-inner">
+				<div class="am-popup-hd">
+					<h4 class="am-popup-title">选择分类</h4>
+					<span data-am-modal-close class="am-close">&times;</span>
+				</div>
+				<div class="am-popup-bd">
+					<ul>
+						<li class="active" data-am-modal-close>特色文化</li>
+						<li data-am-modal-close>美食</li>
+						<li data-am-modal-close>特产</li>
+					</ul>
+				</div>
+			</div>
+		</div>
+
+		<!-- Slider -->
+		<div data-am-widget="slider" class="am-slider am-slider-a1" data-am-slider='{"directionNav":false}'>
+			<ul class="am-slides">
+				<li>
+					<img src="img/banner-1.jpg">
+				</li>
+				<li>
+					<img src="img/banner-1.jpg">
+				</li>
+			</ul>
+		</div>
+
+		<!-- List -->
+		<div class="am-container">
+			<div id="container">
+
+			</div>
+		</div>
+		<!-- Navbar -->
+		<div data-am-widget="navbar" class="am-navbar am-cf am-navbar-default " id="">
+			<ul class="am-navbar-nav am-cf am-avg-sm-4">
+				<li>
+					<a href="txxm.html?id=1">
+						<img src="img/ico-1.png">
+						<span class="am-navbar-label">贴心小蜜</span>
+					</a>
+				</li>
+				<li>
+					<a href="video.html">
+						<img src="img/ico-2.png">
+						<span class="am-navbar-label">视听西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="rwxz.html?id=1" class="curr">
+						<img src="img/ico-3.png">
+						<span class="am-navbar-label">人文西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="index.html?id=1">
+						<img src="img/ico-4.png">
+						<span class="am-navbar-label">畅游西藏</span>
+					</a>
+				</li>
+				<li>
+					<a href="lxwm.html">
+						<img src="img/ico-5.png">
+						<span class="am-navbar-label">联系我们</span>
+					</a>
+				</li>
+
+			</ul>
+		</div>
+
+	</body>
+	<script src="assets/js/json.js" type="text/javascript" charset="utf-8"></script>
+	<script src="assets/js/imagesloaded.pkgd.js" type="text/javascript" charset="utf-8"></script>
+	<script src="assets/js/czcon.js" type="text/javascript" charset="utf-8"></script>
+	<script>
+		$(function() {
+			id == null && amp(1, rwxzData) || amp(id, rwxzData);
+			$('.am-popup-bd ul li').click(function() {
+				var index = $(this).index() + 1;
+				amp(index, rwxzData);
+			});
+		});
+	</script>
+
+</html>
