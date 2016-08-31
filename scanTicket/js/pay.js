@@ -1,4 +1,4 @@
-var fUrl = "http://192.168.1.208:9001/";
+var fUrl = "http://veveue.github.io/scanTicket/";
 
 $(function() {
 	setInterval(GetRTime, 1000);
@@ -61,7 +61,7 @@ $(function() {
 		if(isWeixin) {
 			ss.tradeType = 'JSAPI';
 //			ss.openId = localStorage.getItem('wxcode');
-			ss.openId = 'o7Swjt5AYtao-TQdnuX4NV-Y1cVo'
+			ss.openId = 'otMstuP31NIt96Q7KCV4XVh45nsE'
 		} 
 		var data = ajaxg(ss, 'pay', 'getPayInfo');
 		if(data.head.statusCode == '0000') { 
