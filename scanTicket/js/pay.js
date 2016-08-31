@@ -60,8 +60,8 @@ $(function() {
 		};
 		if(isWeixin) {
 			ss.tradeType = 'JSAPI';
-//			ss.openId = localStorage.getItem('wxcode');
-			ss.openId = 'otMstuP31NIt96Q7KCV4XVh45nsE'
+			ss.openId = localStorage.getItem('wxcode');
+			// ss.openId = 'otMstuP31NIt96Q7KCV4XVh45nsE'
 		} 
 		var data = ajaxg(ss, 'pay', 'getPayInfo');
 		if(data.head.statusCode == '0000') { 
