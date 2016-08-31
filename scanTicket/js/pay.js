@@ -55,8 +55,8 @@ $(function() {
 			"customerIp": localStorage.getItem('ip'),
 			"payOrderId": GetRequest().order_id,
 			"tradeType": 'WAP',
-			"frontUrl": fUrl + "order.html?orderid=" + GetRequest().order_id,
-			"errorUrl": fUrl + "order.html?orderid=" + GetRequest().order_id
+			"frontUrl": fUrl + "order.html",
+			"errorUrl": fUrl + "order.html"
 		};
 		if(isWeixin) {
 			ss.tradeType = 'JSAPI';
