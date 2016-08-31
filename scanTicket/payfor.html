@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<meta name="format-detection" content="telephone=no" />
+		<title>确认支付</title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css" />
+	</head>
+
+	<body>
+		<header class="header">
+			<div class="header-left"><i class="header-icon icon-v-left js-back"></i></div>
+			<h1 class="page-tt">确认支付</h1>
+		</header>
+		<div class="error_b"> </div>
+		<div class="page">
+			<p class="tips">请在<em class="djs"></em>内完成支付，逾期将自动取消预订！</p>
+			<section class="p_section">
+				<div class="weui_cell"><label>订单金额</label>
+					<p class="weui_cell_primary pr_ice tr"></p>
+				</div>
+				<div class="weui_cell"><label>订单编号</label>
+					<p class="weui_cell_primary orderId tr"></p>
+				</div>
+			</section>
+
+			<section class="mt10">
+				<p class="payF">请选择支付方式</p>
+				<ul class="payList"></ul> 
+			</section>
+			<div class="pb40">
+				<div class="ico_care">温馨提示</div>
+				<div class="tis">
+					<p class="ip_tis">若有任何疑问请拨打客服热线：
+						<a href="tel:400-660-8787">400-660-8787 <i class="i_phone"></i></a>
+					</p> 
+				</div>
+			</div>
+			<div class="error_b"> </div>
+			<div class="fl_cont">
+				<div class="bt_cont_nu"><i class="pr_ice"></i><i class="Pay">（）</i> </div>
+				<div class="fl_cont_bt btn_buy">确认支付</div>
+			</div>
+		</div>
+		<script src="js/jQuery.js?v=1" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js?v=1" type="text/javascript" charset="utf-8"></script>
+		<script src="js/pay.js?v=1" type="text/javascript" charset="utf-8"></script> 
+		
+	</body>
+
+</html>

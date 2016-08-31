@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<meta name="format-detection" content="telphone=no,email=no">
+		<title>填写订单</title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css" /> 
+	</head>
+
+	<body>
+		<header class="header">
+			<!--<div class="header-left"><i class="header-icon icon-v-left js-back"></i></div>-->
+			<h1 class="page-tt">填写订单</h1>
+		</header>
+		<div class="error_b"> </div>
+		<div class="page">
+			<section>
+				<h2 class="guide-title"><i class="data"></i>   <span class="price">票价  <b></b></span> </h2>
+				<div class="form-item">
+					<div class="flight-card-item">
+						<div class="item">
+							<div class="main-info">
+								<div class="col">
+									<p class="city City"></p>
+									<p class="strat_z CarryStaName"></p>
+								</div>
+								<div class="col">
+									<div class="content">
+										<p class="time DrvDateTime"></p>
+										<i class="arrow"></i>
+										<!--<p class="mode">固定班</p>-->
+									</div>
+								</div>
+								<div class="col">
+									<p class="city StopName"></p>
+								</div>
+							</div>
+						</div> 
+					</div>
+				</div>
+				<h2 class="guide-title center ft14 attentions ma40">本班次是固定班，乘客须在截止时间之前到站乘车</h2>
+			</section>
+			<section class="mt10">
+				<div class="weui_cells weui_cells_form">
+					<div class="weui_cell" id="picker">
+						<div class="weui_cell_hd weui_cell_primary"><label class="weui_label">购票数量</label></div>
+						<div class="weui_cell_ft pn">1张</div>
+					</div>
+
+					<div class="weui_cell">
+						<div class="weui_cell_hd"><label class="weui_label">手机号码</label></div>
+						<div class="weui_cell_bd weui_cell_primary">
+							<input class="weui_input" id="phone" type="tel" placeholder="用于接收取票验证码" maxlength="11"/>
+							<script type="text/javascript">  
+							    document.getElementById('phone').addEventListener('input', function(e){  
+							        e.target.value = e.target.value.substring(0,11);   
+							    });  
+							</script>  
+						</div>
+					</div>
+
+				</div>
+			</section>
+			
+			<section>
+				<div class="ico_care">重要提示</div>
+				<div class="tis">
+					<p>1.禁止行为：进入支付页面后，退出，再次进入支付页面会导致购票失败；</p>
+					<p>2.购票成功：完成订单支付后请查看“取票验证码”，并及时到取票机取票； </p>
+					<p>3.关于退票：扫码购票方式不支持在线退票，如需办理退票，请在车站取票后退票，退票手续费按车站规定收取； </p>
+					<p>4.购买票种：扫码购票方式仅支持购买成人票，不支持购买儿童半票、免票儿童票及其他特殊票种。 </p>
+				</div>
+			</section>
+			<div class="fl_cont">
+				<div class="bt_cont_nu">合计：<i class="total"></i> <i class="num">1张</i></div>
+				<div class="fl_cont_bt" id="btnSubmit">提交订单</div>
+			</div>
+		</div>
+		<div class="error_b"> </div>
+		<!--X-->
+		<section class="panel-wrap ">
+			<div class="overlay"></div>
+			<section class="bottom-panel panel--picker">
+				<div class="panel-hd">
+					<span class="hd-btn btn-cancel">取消</span>
+					<span class="hd-btn btn-ok">确定</span>
+				</div>
+				<div class="picker-list">
+					<div class="picker-item pick pick-timer" data-length="5">
+						<ul class="select-list list">
+							<li id="1z" data-picker-value="1" class="active">1张</li>
+							<li id="2z" data-picker-value="2">2张</li>
+							<li id="3z" data-picker-value="3">3张</li>
+							<li id="4z" data-picker-value="4">4张</li>
+							<li id="5z" data-picker-value="5">5张</li>
+						</ul>
+						<div class="picker-mask"></div>
+					</div>
+				</div>
+			</section>
+		</section>
+		<div class="loading" id="loading" style="display: none;"><div><i></i></div></div>
+		<script src="http://pv.sohu.com/cityjson?ie=utf-8" type="text/javascript" charset="utf-8"> </script> 
+		<script src="js/jQuery.js?v=1" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js?v=1" type="text/javascript" charset="utf-8"></script> 
+		<script src="js/new_file.js?v=1" type="text/javascript" charset="utf-8"></script> 
+	</body> 
+</html>

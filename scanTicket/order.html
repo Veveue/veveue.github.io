@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=0">
+		<meta name="format-detection" content="telephone=no" />
+		<title>购票结果</title>
+		<link rel="stylesheet" type="text/css" href="css/new_file.css" />
+	</head>
+
+	<body>
+		<header class="header">
+			<!--<div class="header-left"><i class="header-icon icon-v-left js-back"></i></div>-->
+			<h1 class="page-tt">购票结果</h1>
+		</header>
+		<div class="error_b"> </div>
+		<div class="page">
+			<!---->
+			<div class="tis_suss g_tips">
+				<p class="state"><i class="ico_s"></i>购票成功</p>
+				<p class="y_code">验证码：<span></span></p>
+			</div>
+			<!---->
+			<div class="tis_err g_tips">
+				<p class="state"><i class="ico_e"></i>购票失败</p>
+				<button type="button" class="btn btn-info">重新购买</button>
+			</div>
+
+			<!---->
+			<div class="tis_lod g_tips">
+				<p class="state"><i class="ico_z"></i>正在预订<img src="img/loading.svg" style="width: 1.5rem" /><i class="ndjs"></i></p>
+			</div>
+			<div class="pb40">
+				<div class="ico_care">温馨提示</div>
+				<div class="tis">
+					<p class="ip_tis">若有任何疑问请拨打客服热线：
+						<a href="tel:400-660-8787">400-660-8787 <i class="i_phone"></i></a>
+					</p>
+					<p>祝您旅途愉快！</p>
+				</div>
+			</div>
+		</div>
+		<script src="js/jQuery.js?v=1" type="text/javascript" charset="utf-8"></script>
+		<script src="js/common.js?v=1" type="text/javascript" charset="utf-8"></script>
+		<script type="text/javascript">
+			$(function() {
+				var i = 1;
+				var c;
+
+				function update() {
+					if(i < 0) {
+						clearInterval(c);
+					} else {
+						$(".ndjs").html(i+'s');
+						i++;
+					}
+				}
+				c = setInterval(update, 1000);
+				var sv = {
+					"payOrderId": localStorage.getItem('orderid'),
+					"openId": localStorage.getItem('oId')
+				};
+				setTimeout(function() {
+					var data_pay = ajaxg(sv, 'ticket', 'getUserOrderTicketInfo');
+					console.log(data_pay);
+					if(data_pay) {
+						if(data_pay.head.statusCode == '0000') {
+							if(data_pay.body.state == "sell_succeeded") {
+									$('.tis_lod').hide();
+									$('.tis_suss').show();
+									$('.y_code').html('验证码：' + data_pay.body.code);
+							} else {
+									$('.tis_lod').hide();
+									$('.tis_err').show();
+							}
+						} else {
+							toast(data_pay.head.statusMessage);
+						}
+					}
+				}, 3000);
+				$('.btn-info').on('click', function() {
+					location.href = "index.html?qbCode=" + localStorage.getItem('qbCode');
+				});
+			});
+		</script>
+	</body>
+
+</html>
