@@ -1,0 +1,258 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title></title>
+	<link rel="stylesheet" href="fontawesome-4.2.0/css/font-awesome.min.css"> 
+	<style type="text/css">
+		html,body{
+			width: 100%;
+			height: 100%;
+			padding: 0;
+			margin: 0;
+			font-family: Arial,'Microsoft Yahei';
+			font-size: 12px;
+		}
+		.margin-10{
+			margin:10px;
+		}
+		.float{
+			float: left;
+			margin: 10px;
+		}
+		.time-picker{
+			position: relative;
+			display: inline-block;
+			width: auto;
+		}
+		.time-picker .content{
+			width: 98px;
+			height: 26px;
+			line-height: 26px;
+			border: 1px solid #d9d9d9;
+			color: #666;
+			padding: 0;
+			border-radius: 6px;
+			text-indent: 10px;
+			outline: none;
+			font-family: Arial,'Microsoft Yahei';
+			font-size: 12px;
+			/*transition: all .1s;*/
+		}
+		.time-picker .content:hover{
+		    border-color: #57c5f7;
+		}
+		.time-picker .content.selecting{
+			width: 144px;
+			height: 29px;
+			box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+			border-radius: 6px 6px 0 0;
+			border-bottom: 1px solid #e9e9e9;
+		}
+		.time-picker .content.selecting:hover{
+			border-color: #ccc;
+		}
+		.time-picker .fa{
+			color: #999;
+			font-size: 16px;
+			font-weight: 0;
+			position: absolute;
+			top: 6px;
+			right: 8px;
+		}
+		.time-picker .fa.fa-times-circle{
+			cursor: pointer;
+			display: none;
+		}
+		.time-picker .fa.fa-times-circle:hover{
+			color: #666;
+		}
+		.time-picker .content.selecting ~ .fa.fa-times-circle,
+		.time-picker .content.selecting ~ .fa.fa-times-circle{
+			display: block;
+		}
+		.time-picker .content.selecting ~ .fa.fa-clock-o{
+			display: none;
+		}
+		.time-picker .selector{
+			width: 144px;
+			height: 144px;
+			position: absolute;
+			left: 0;
+			top: 31px;
+			border:1px solid #ccc;
+			border-top: none;
+			background-color: #fff;
+			border-radius: 0 0 6px 6px;
+			box-shadow: 0 1px 6px hsla(0,0%,39%,.2);
+			z-index: 9;
+			display: none;
+			overflow: hidden;
+		}
+		.time-picker .selector:before{
+			content:"";
+			width: 100%;
+			height: 24px;
+			background-color: #f7f7f7;
+			position: absolute;
+			top: 0;
+			left: 0;
+		}
+		.time-picker .selector ul,.time-picker .selector ul li{
+			list-style: none;
+			padding: 0;
+			margin: 0;
+		}
+		.time-picker .selector ul{
+			width: 33%;
+			height: 100%;
+			float: left;
+			transition: all .2s;
+		}
+		.time-picker .selector ul li{
+			border-left:1px solid #e9e9e9;
+			border-right: 1px solid #fff;
+			text-indent: 15px;
+			height: 24px;
+			line-height: 24px;
+			cursor: pointer;
+			color: #666;
+			transition: all .2s;
+		}
+		.time-picker .selector ul li:hover{
+			background-color: #eaf8fe;
+		}
+		.time-picker .selector ul:last-child li{
+			border-right: none;
+		}
+	</style>
+</head>
+<body>
+	<div class="timePicker float"></div>
+	
+	<script type="text/javascript" src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script> 
+	<script>
+		$(function(){
+			$(".timePicker").timePicker({
+				placeholder:"提醒时间"
+			});
+		});
+	</script>
+	<script>
+		$.fn["timePicker"] = function(options){
+			var __DEFAULTS__ = {
+				name : "name",
+				placeholder : "请选择时间"
+			};
+			var __PROTO__ = {
+				getSystemTime : function(){
+					return new Date().toTimeString().substr(0,8);
+				},
+				setSelection : function(input, startPos, endPos){
+					window.setTimeout(function(){
+			        	if (typeof input.selectionStart != "undefined") {
+				            input.selectionStart = startPos;
+				            input.selectionEnd = endPos;
+				        } else if (document.selection && document.selection.createRange) {
+				            input.select();
+				            var range = document.selection.createRange();
+				            range.collapse(true);
+				            range.moveStart("character", startPos);
+				            range.moveEnd("character", endPos);
+				            range.select();
+				        }
+			        },50);
+				},
+				setFiledValue : function($filed,value){
+					value = Number(value);
+					value = Math.max(value,0);
+					$filed.attr("value",value).css({
+							transform: "translateY(-"+value*24+"px)"
+						});
+					var index = $filed.index();
+					var start = index*2+index;
+					var $content = $filed.parent().prevAll(".content");
+					var times = $content.val().split(":");
+					times[index] = value<10?"0"+value:value;
+					$content.val(times.join(":"));
+					this.setSelection($content[0],start,start+2);
+				},
+				_render : function(){
+					this.html('<div class="time-picker">'+
+						'<input name="'+this.options.name+'" class="content" placeholder="'+this.options.placeholder+'">'+
+						'<i class="fa fa-clock-o"></i>'+
+						'<i class="fa fa-times-circle"></i>'+
+						'<div class="selector">'+
+							'<ul class="hours">'+
+							'</ul>'+
+							'<ul class="minutes">'+
+							'</ul>'+
+							'<ul class="seconds">'+
+							'</ul>'+
+						'</div>'+
+					'</div>');
+					this.$selector = this.find(".time-picker .selector");
+					this.$hours = this.$selector.find(".hours");
+					this.$minutes = this.$selector.find(".minutes");
+					this.$seconds = this.$selector.find(".seconds");
+					var html = "";
+					for(var i=0;i<60;i++){
+						i==24&&this.$hours.html(html);
+						html+="<li>"+(i<10?"0"+i:i)+"</li>";
+					}
+					this.$minutes.html(html);
+					this.$seconds.html(html);
+				},
+				_handle : function(){
+					var $this = this;
+					this.find(".time-picker .content").on("focus",function(){
+						if(!this.value){
+							var $selector = $(this).nextAll(".selector");
+							this.value = $this.getSystemTime();
+							var time = this.value.split(":");
+							var $first = $selector.children().first();
+							$this.setFiledValue($first,time[0]);
+							$this.setFiledValue($first = $first.next(),time[1]);
+							$this.setFiledValue($first = $first.next(),time[2]);
+						}
+						$(this).addClass("selecting").nextAll(".selector").show(50);
+						$this.setSelection(this,0,10);
+					}).on("blur",function(){
+						var $selector = $(this).nextAll(".selector");
+						var selecting = $selector.attr("selecting");
+						if(!selecting||selecting==="false"){
+							$selector.hide(50);
+							$(this).removeClass("selecting");
+						}
+					}).nextAll(".fa-times-circle").on('click',function(){
+						$(this).prevAll("input").val("").trigger("blur");
+					}).next().hover(function(){
+						$(this).attr("selecting","true");
+					},function(){
+						$(this).attr("selecting","false");
+					}).find("ul").on('mouseover',function(){
+						var start = $(this).index()*2+$(this).index();
+						$this.setSelection($(this).parent().prevAll("input")[0],start,start+2);
+					}).on('wheel',function(event){
+						var $field = $(event.currentTarget);
+						var currValue = Number($field.attr("value"));
+						if(event.originalEvent.wheelDelta<0){
+							currValue++;
+						}else{
+							currValue--;
+						}
+						$this.setFiledValue($field,currValue);
+					}).find("li").on('click',function(){
+						var $this_ = $(this);
+						$this.setFiledValue($this_.parent(),Number($this_.html()));
+					});
+				}
+			};
+			this.options = $.extend(__DEFAULTS__,options);
+			$.extend(this,__PROTO__);
+			this._render();//初始化dom信息
+			this._handle();//绑定dom事件
+		}
+	</script>
+</body>
+</html>
