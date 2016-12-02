@@ -19,7 +19,7 @@
 			body {
 				display: flex;
 				background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) no-repeat;
-				background-size: 100%;
+				background-size: 100% 104%;
 				-webkit-box-pack: center;
 				-webkit-justify-content: center;
 				justify-content: center;
@@ -27,7 +27,13 @@
 				-webkit-align-items: center;
 				align-items: center;
 			}
-			
+			@media (max-width:320px) {
+				body {
+					display: flex;
+					background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) 70% 0% no-repeat;
+					background-size: 150% 104%;
+				}
+			}
 			.sky {
 				height: 100%;
 				width: 100%;
