@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style type="text/css"> 
+			* {
+				margin: 0;
+				padding: 0;
+			}
+			
+			body {
+				padding: 15px;
+			}
+			
+			.wrap {
+				font-family: "microsoft yahei";
+				width: 100%;
+				margin-bottom: 50px;
+				display: inline-block;
+			}
+			
+			h3 {
+				text-align: center;
+				margin-bottom: 20px;
+				color: #999;
+			}
+			
+			.demo {
+				width: 188px;
+				height: 188px;
+				background: #f5f5f5;
+				margin: 5px;
+				float: left;
+				margin-left: 20px;
+				/*flex布局（作用于容器）*/
+				display: flex;
+				/*水平居中（作用于容器）*/
+				justify-content: center;
+				/*垂直居中（作用于容器）*/
+				align-items: center;
+			}
+			
+			.demo img {
+				max-width: 150px;
+				max-height: 150px;
+				width: auto;
+				height: auto;
+			}
+			/*水平响应列表*/
+			
+			.demo-wrap {
+				border: 2px solid #ddd;
+				background: #f7f7f7;
+				height: 300px;
+			}
+			/*水平响应式列表*/
+			
+			.demo1 {
+				width: 100%;
+				background-color: #333;
+				/*flex布局（作用于容器）*/
+				display: flex;
+				/*两端对齐（作用于容器）*/
+				justify-content: space-between;
+			}
+			/*水平响应式列表底端对齐*/
+			
+			.demo2 {
+				width: 100%;
+				background-color: #f5f5f5;
+				/*flex布局（作用于容器）*/
+				display: flex;
+				/*两端对齐（作用于容器）*/
+				justify-content: space-around;
+				align-items: flex-end;
+			}
+			/*多行响应式布局*/
+			
+			.demo3 {
+				width: 100%;
+				/*flex布局（作用于容器）*/
+				display: flex;
+				/*两端对齐（作用于容器）*/
+				justify-content: space-around;
+				/*侧轴方向对齐方式（作用于容器）*/
+				align-items: flex-end;
+				/*换行（作用于容器）*/
+				flex-wrap: wrap;
+			}
+			
+			.demo3 .item {
+				width: 300px;
+				height: 50px;
+				background: #444;
+				margin-bottom: 20px;
+			}
+			/*左固定右自适应等高布局*/
+			
+			.demo4 {
+				display: flex;
+				/*项目拉伸对齐，也就是所左边的高度为拉伸到和右边等高，默认是拉伸的*/
+				/*align-items: stretch;*/
+			}
+			
+			.demo4 .left {
+				/*左边固定宽度，必须设置其最小宽度和最大宽度*/
+				width: 200px;
+				min-width: 200px;
+				max-width: 200px;
+				/*高度自由分配*/
+				height: auto;
+				background-color: #333;
+				color: #fff;
+				/*空白区域分配比例为0（作用于项目）*/
+				flex-grow: 0;
+			}
+			
+			.demo4 .right {
+				margin-left: 10px;
+				width: auto;
+				height: 200px;
+				background-color: #333;
+				color: #fff;
+				/*空白区域分配比例为1（作用于项目）
+    左右得到的空白比例为0:1，所以右边会分配到剩余的所有空白区域，
+    左边成固定的宽度，右边为自适应宽度*/
+				flex-grow: 1;
+			}
+			/*左右固定中间自适应宽度底部对齐布局*/
+			
+			.demo5 {
+				display: flex;
+			}
+			
+			.demo5 .left,
+			.demo5 .right {
+				width: 200px;
+				height: auto;
+				max-width: 200px;
+				min-width: 200px;
+				background-color: #333;
+				color: #fff;
+				flex-grow: 0;
+			}
+			
+			.demo5 .center {
+				width: auto;
+				height: 200px;
+				background-color: #66cccc;
+				color: #fff;
+				flex-grow: 1;
+			}
+			
+			.item {
+				width: 100px;
+				background: #66cccc;
+				color: #C90000;
+				font-size: 20px;
+				text-align: center;
+				line-height: 50px;
+			}
+			
+			.item1 {
+				height: 120px;
+			}
+			
+			.item2 {
+				height: 50px;
+			}
+			
+			.item3 {
+				height: 140px;
+			}
+			
+			.item4 {
+				height: 100px;
+			}
+			
+			.demo6 {
+				width: 188px;
+				background: #f5f5f5;
+				margin: 5px;
+				float: left;
+				margin-left: 20px;
+			}
+			
+			.demo6 img {
+				display: none;
+			}
+			
+			.demo {
+				width: 188px;
+				height: 188px;
+				background: #f5f5f5;
+				margin: 5px;
+				float: left;
+				margin-left: 20px;
+				/*flex布局（作用于容器）*/
+				display: flex;
+				/*水平居中（作用于容器）*/
+				justify-content: center;
+				/*垂直居中（作用于容器）*/
+				align-items: center;
+			}
+			
+			.demo img {
+				max-width: 150px;
+				max-height: 150px;
+				width: auto;
+				height: auto;
+			}
+		</style>
+	</head>
+
+	<body>
+
+		<!--flex:垂直/水平居中-->
+
+		<div class="wrap">
+
+			<h3>flex:垂直/水平居中:<span class="code">{display:flex;justify-content:center;align-items:center}</span></h3>
+
+			<div class="demo">
+        <img src="http://dummyimage.com/100x100" alt="">
+      </div>
+
+      <div class="demo">
+        <img src="http://dummyimage.com/100x200" alt="">
+      </div>
+
+      <div class="demo">
+        <img src="http://dummyimage.com/200x100" alt="">
+      </div>
+
+      <div class="demo">
+        <img src="http://dummyimage.com/50x50" alt="">
+      </div>
+
+
+		</div>
+
+		<!--水平响应式列表-->
+
+		<div class="wrap">
+			<h3>水平响应式列表:<span class="code">{display:flex;justify-content:space-between;}</span></h3>
+			<div class="demo1">
+				<div class="item item1">高120px</div>
+				<div class="item item2">高50px</div>
+				<div class="item item3">高140px</div>
+				<div class="item item4">高100px</div>
+			</div>
+		</div>
+
+		<!--水平响应式列表底端对齐-->
+
+		<div class="wrap">
+			<h3>水平响应式列表底端对齐:<span class="code">{display:flex;justify-content:space-around;align-items:flex-end;}</span></h3>
+			<div class="demo2">
+				<div class="item item1">高120px</div>
+				<div class="item item2">高50px</div>
+				<div class="item item3">高140px</div>
+				<div class="item item4">高100px</div>
+			</div>
+		</div>
+
+		<!--多行响应式布局-->
+
+		<div class="wrap">
+			<h3>多行响应式布局:<span class="code">{display:flex;justify-content:space-around;align-items:flex-end;flex-wrap:wrap;}</span></h3>
+			<div class="demo3">
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+				<div class="item"></div>
+			</div>
+		</div>
+
+		<!--左固定右自适应等高布局-->
+
+		<div class="wrap">
+			<h3>左固定右自适应等高布局:<span class="code">{display:flex(父);flex-grow:0(子/固定);flex-grow:1(子/自适应);}</span></h3>
+
+			<div class="demo4">
+				<div class="left">左边固定宽度为100px，这里设置了高度为auto</div>
+				<div class="right">右边宽度自适应，并且左右两个区域是等高的，这里设置了高度为200px</div>
+			</div>
+
+		</div>
+
+		<!--左右固定中间自适应宽度底部对齐布局-->
+
+		<div class="wrap">
+
+			<h3>左右固定中间自适应宽度底部对齐布局:<span class="code">{display:flex(父);flex-grow:0(子/左/固定);flex-grow:1(子/中/自适应);flex-grow:0(子/右/固定);}</span></h3>
+
+			<div class="demo5">
+				<div class="left">左边固定宽度为200px，这里设置了高度为auto</div>
+				<div class="center">中间宽度自适应，并且左右两个区域是等高的，这里设置了高度为200px</div>
+				<div class="right">右边固定宽度为200px，这里设置了高度为auto</div>
+			</div>
+
+		</div>
+
+	</body>
+
+</html>
