@@ -269,7 +269,42 @@ h2 {
 }
 
 
+.flex-wrap-1 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
 
+.flex-wrap-2 {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap-reverse;
+	;
+}
+
+.flex-wrap-2>span,
+.flex-wrap-1>span {
+	background: #00A5E0;
+	display: inline-block;
+	flex: 0 0 23%;
+	text-align: center;
+	margin: 1px 1%;
+	color: #fff;
+}
+
+.align-items-1 {
+	height: 200px;
+	display: flex;
+	border-top: 1px #F74C31 solid;
+	border-bottom: 1px #F74C31 solid;
+}
+.viewx{
+	padding: 10px;
+}
+.viewx>p{
+	margin: 4px 0;
+	background: #fbfbfb;
+}
 
 
 
