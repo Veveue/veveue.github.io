@@ -159,6 +159,54 @@
                 </div>
             </div>
         </div>
+	<h3>7.wrap：换行，正常的折行    </h3>
+	<div class="flex-wrap-1">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+	</div>
+	<h3>8.wrap-reverse  第二行在第一行上方；            </h3>
+	<div class="flex-wrap-2">
+		<span>1</span>
+		<span>2</span>
+		<span>3</span>
+		<span>4</span>
+		<span>5</span>
+		<span>6</span>
+		<span>7</span>
+		<span>8</span>
+		<span>9</span>
+	</div>
+	<h3>9.wrap-reverse  第二行在第一行上方；            </h3>
+	<div class="align-items-1">
+		<div style="align-items:center;width: 10px;background: #00A5E0;"></div>
+		<div style="align-items:baseline;width: 10px;background: #00A5E0;"></div>
+		<div style="align-items:stretch;width: 10px;background: #00A5E0;"></div>
+	</div>
+	<h3>10.控制子元素的显示方式；分别是：</h3>
+	<div class="viewx">
+		<p>flex-direction 设置主轴对齐方式 默认 row x轴从左到右；</p>
+		<p>flex-wrap 子元素换行的方式 默认nowrap ；</p>
+		<p>flex-flow flex-direction和flex-wrap的简写 默认row nowrap；</p>
+		<p>justify-content 子元素的对齐方式 默认flex-start 左对齐</p>
+		<p>align-items：交叉轴如何对齐，如果flex-direction：row和row-reverse 那么交叉轴就是y轴，如果是column和column-reverse那么交叉轴是x轴 </p>
+		<p>align-content:属性定义了多根轴线的对齐方式。如果项目只有一根轴线，该属性不起作用。</p>
+	</div>
+	<h3>11.有六个属性设置在子元素项目上：    </h3>
+	<div class="viewx">
+		<p>order 子元素排列的位置默认是按照html先后顺序来排列的，html结构谁在前面默认就排列在前面；order的作用就是改变子元素排列顺序.默认（0） 值越小越靠前</p>
+		<p>flex-grow放大比例  默认是0   当有放大空间的时候，值越大，放大的比例越大</p>
+		<p>flex-shrink:缩小比例  默认是1  值越大，缩小的时候比例越小；</p>
+		<p>flex-basis属性定义了在分配多余空间之前，项目占据的主轴空间（main size）。浏览器根据这个属性，计算主轴是否有多余空间。它的默认值为auto，即项目的本来大小</p>
+		<p>flex属性是flex-grow, flex-shrink 和 flex-basis的简写，默认值为0 1 auto。后两个属性可选。</p>
+		<p>align-self属性允许单个项目有与其他项目不一样的对齐方式，可覆盖align-items属性。默认值为auto，表示继承父元素的align-items属性，如果没有父元素，则等同于stretch。</p>
+	</div>
     </body>
 </html>
 
