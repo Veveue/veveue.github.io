@@ -1,161 +1,178 @@
 <!DOCTYPE html>
 <html>
 
-	<head>
-		<meta charset="UTF-8">
-		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
-        <meta name="keywords" content="梅子丹" />
-        <meta name="description" content="梅子丹" />
-        <title>梅子丹</title>
-		<style type="text/css">
-			html,
-			body {
-				height: 100%;
-				width: 100%;
-				padding: 0;
-				margin: 0;
-				overflow: hidden;
-                -webkit-text-size-adjust: none;
-                -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-                font-family: '迷你简硬笔行书',Helvetica Neue,Helvetica,microsoft yahei,arial,STHeiTi,sans-serif,simhei;
-			}
-            ::-webkit-scrollbar {
-                width: 2px;
-                height: 2px;
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+    <meta name="keywords" content="梅子丹"/>
+    <meta name="description" content="梅子丹"/>
+    <title>梅子丹</title>
+    <style type="text/css">
+        html,
+        body {
+            height: 100%;
+            width: 100%;
+            padding: 0;
+            margin: 0;
+            overflow: hidden;
+            -webkit-text-size-adjust: none;
+            -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+            font-family: '迷你简硬笔行书', Helvetica Neue, Helvetica, microsoft yahei, arial, STHeiTi, sans-serif, simhei;
+        }
+
+        ::-webkit-scrollbar {
+            width: 2px;
+            height: 2px;
+        }
+
+        ::-webkit-scrollbar-track-piece {
+            background-color: rgba(255, 255, 255, 0);
+        }
+
+        ::-webkit-scrollbar-thumb:vertical {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        ::-webkit-scrollbar-thumb:horizontal {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        @font-face {
+            font-family: '迷你简硬笔行书';
+            src: url('http://ohjr3xer5.bkt.clouddn.com/%E8%BF%B7%E4%BD%A0%E7%AE%80%E7%A1%AC%E7%AC%94%E8%A1%8C%E4%B9%A6.TTF');
+        }
+
+        body {
+            position: relative;
+            display: flex;
+            background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) no-repeat;
+            background-size: 100% 104%;
+            -webkit-box-pack: center;
+            -webkit-justify-content: center;
+            justify-content: center;
+            -webkit-box-align: center;
+            -webkit-align-items: center;
+            align-items: center;
+        }
+
+        .wuxia {
+            transform: translate(-50%, -50%);
+            position: absolute;
+            top: 50%;
+            left: 4%;
+            width: 20px;
+            color: #e7e7e7;
+            font-size: 2rem;
+            font-weight: bold;
+            text-shadow: 5px 0px 1px #6f6f6f;
+        }
+
+        .sky {
+            height: 100%;
+            width: 100%;
+            display: flex;
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+        }
+
+        @-webkit-keyframes rainDrop {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -1300px 1035px;
+            }
+        }
+
+        @-moz-keyframes rainDrop {
+            0% {
+                background-position: 0 0;
+            }
+            100% {
+                background-position: -1300px 1035px;
+            }
+        }
+
+        .rain,
+        .leaves {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+
+        .rain {
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            background: url(http://ohjr3xer5.bkt.clouddn.com/rain-8.png) 0 0;
+            opacity: .4;
+            -webkit-animation-name: rainDrop;
+            animation-name: rainDrop;
+            -webkit-animation-timing-function: linear;
+            animation-timing-function: linear;
+            -webkit-animation-duration: 1.2s;
+            animation-duration: 1.2s;
+            -webkit-animation-iteration-count: infinite;
+            animation-iteration-count: infinite;
+        }
+
+        .title {
+            font-size: 32px;
+        }
+
+        #write {
+            background: rgba(255, 255, 255, .2);
+            width: 55%;
+            max-height: 95%;
+            overflow-y: auto;
+            overflow-x: auto;
+        }
+
+        .bg {
+            filter: blur(10px);
+            height: 100%;
+            width: 100%;
+        }
+
+        @media screen and (max-width: 450px) {
+            body {
+                display: flex;
+                background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) 70% 0% no-repeat;
+                background-size: 150% 104%;
             }
 
-            ::-webkit-scrollbar-track-piece {
-                background-color: rgba(255, 255, 255, 0);
+            #write {
+                width: 68%;
+                padding: .5rem;
+                margin-left: 2.5rem;
             }
 
-            ::-webkit-scrollbar-thumb:vertical {
-                background-color: rgba(255, 255, 255, 0.1);
+            .wuxia {
+                left: 8%;
             }
+        }
+    </style>
+    <link href='http://cdn.webfont.youziku.com/webfonts/nomal/95626/19650/58da0549f629da16400dde85.css' rel='stylesheet'
+          type='text/css'/>
+</head>
 
-            ::-webkit-scrollbar-thumb:horizontal {
-                background-color: rgba(255, 255, 255, 0.1);
-            }
-            @font-face {
-                font-family:'迷你简硬笔行书';
-                src: url('http://ohjr3xer5.bkt.clouddn.com/%E8%BF%B7%E4%BD%A0%E7%AE%80%E7%A1%AC%E7%AC%94%E8%A1%8C%E4%B9%A6.TTF');
-            }
-			body {
-                position: relative;
-				display: flex;
-				background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) no-repeat;
-				background-size: 100% 104%;
-				-webkit-box-pack: center;
-				-webkit-justify-content: center;
-				justify-content: center;
-				-webkit-box-align: center;
-				-webkit-align-items: center;
-				align-items: center;
-			}
+<body>
+    <div class="wuxia">淡看江湖路</div>
+    <audio src="http://ohjr3xer5.bkt.clouddn.com/3343614861307841.mp3" preload="auto" autoplay="autoplay" id="audio"
+           loop="loop"></audio>
+    <div class="sky">
+        <div class="rain"></div>
+        <div class="leaves"></div>
+    </div>
+    <div class="title">
 
-            .wuxia{
-                transform: translate(-50%,-50%);
-                position: absolute;
-                top: 50%;
-                left: 4%;
-                width: 20px;
-                color: #e7e7e7;
-                font-size: 2rem;
-                font-weight: bold;
-                text-shadow: 5px 0px 1px #6f6f6f;
-            }
-			.sky {
-				height: 100%;
-				width: 100%;
-				display: flex;
-				position: absolute;
-				top: 0;
-				left: 0;
-				z-index: -1;
-			}
-
-			@-webkit-keyframes rainDrop {
-				0% {
-					background-position: 0 0;
-				}
-				100% {
-					background-position: -1300px 1035px;
-				}
-			}
-
-			@-moz-keyframes rainDrop {
-				0% {
-					background-position: 0 0;
-				}
-				100% {
-					background-position: -1300px 1035px;
-				}
-			}
-
-			.rain,
-			.leaves {
-				position: absolute;
-				top: 0;
-				left: 0;
-				width: 100%;
-				height: 100%;
-			}
-
-			.rain {
-				-webkit-transform: translate3d(0, 0, 0);
-				transform: translate3d(0, 0, 0);
-				background: url(http://ohjr3xer5.bkt.clouddn.com/rain-8.png) 0 0;
-				opacity: .4;
-				-webkit-animation-name: rainDrop;
-				animation-name: rainDrop;
-				-webkit-animation-timing-function: linear;
-				animation-timing-function: linear;
-				-webkit-animation-duration: 1.2s;
-				animation-duration: 1.2s;
-				-webkit-animation-iteration-count: infinite;
-				animation-iteration-count: infinite;
-			}
-			.title{
-				font-size: 32px;
-			}
-            #write{
-                background: rgba(255,255,255,.2);
-                width: 55%;
-                max-height: 95%;
-                overflow-y: auto;
-                overflow-x: auto;
-            }
-            @media  screen and (max-width:450px) {
-                body {
-                    display: flex;
-                    background: url(http://ohjr3xer5.bkt.clouddn.com/rain.jpg) 70% 0% no-repeat;
-                    background-size: 150% 104%;
-                }
-                #write{
-                    width: 68%;
-                    padding: .5rem;
-                    margin-left: 2.5rem;
-                }
-                .wuxia{
-                    left: 8%;
-                }
-            }
-		</style>
-        <link href='http://cdn.webfont.youziku.com/webfonts/nomal/95626/19650/58da0549f629da16400dde85.css' rel='stylesheet' type='text/css' />
-	</head>
-
-	<body>
-        <div class="wuxia">淡看江湖路</div>
-		<audio src="http://ohjr3xer5.bkt.clouddn.com/3343614861307841.mp3" preload="auto" autoplay="autoplay" id="audio" loop="loop"></audio>
-		<div class="sky">
-			<div class="rain"></div>
-			<div class="leaves"></div>
-		</div>
-		<div class="title">
-
-		</div>
-        <pre id="write" class="css9b8cdef141758a">
+    </div>
+    <pre id="write" class="css9b8cdef141758a">
         </pre>
-        <pre id="read" style="display: none;">
+    <pre id="read" style="display: none;">
 作曲 : 明日天涯的KOKI
 作词 : 清彦
 【STAFF】
@@ -251,19 +268,19 @@
 五哥（阿姐）
 风夜北：自入江湖，繁华过眼，红尘虚度 ，唯记平生应思量
 		</pre>
-	</body>
-    <script language="javascript">
-        var index = 0;
-        var word = document.getElementById("read").innerHTML;
-        var write = document.getElementById("write")
-        function type() {
-            write.innerHTML = word.substring(0, index++);
-            write.scrollTop = write.scrollHeight;
-            if(index>word.length){
-                window.clearInterval(sl);
-            }
+</body>
+<script language="javascript">
+    var index = 0;
+    var word = document.getElementById("read").innerHTML;
+    var write = document.getElementById("write")
+    function type() {
+        write.innerHTML = word.substring(0, index++);
+        write.scrollTop = write.scrollHeight;
+        if (index>word.length) {
+            window.clearInterval(sl);
         }
-        var sl = setInterval(type, 200);
-    </script>
+    }
+    var sl = setInterval(type, 200);
+</script>
 
 </html>
