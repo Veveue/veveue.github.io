@@ -269,6 +269,7 @@
 风夜北：自入江湖，繁华过眼，红尘虚度 ，唯记平生应思量
 		</pre>
 </body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script> 
 <script language="javascript">
     var index = 0;
     var word = document.getElementById("read").innerHTML;
@@ -281,18 +282,23 @@
         }
     }
     var sl = setInterval(type, 200);
-function audioAutoPlay(id){
-	var audio = document.getElementById(id);
-	audio.play();
-    document.addEventListener("WeixinJSBridgeReady", function () {
-            audio.play();
-    }, false);
-    document.addEventListener('YixinJSBridgeReady', function() {
-    	audio.play();
-    }, false);
-}
-audioAutoPlay('audio');
 
+	function autoPlayAudio() {
+        wx.config({ 
+            debug: false,
+            appId: '',
+            timestamp: 1,
+            nonceStr: '',
+            signature: '',
+            jsApiList: []
+        });
+        wx.ready(function() {
+            var globalAudio=document.getElementById("audio");
+            globalAudio.play();
+        });
+};
+autoPlayAudio();
 </script>
+ 
 
 </html>
