@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8"> 
+		<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no, maximum-scale=1">
+		<title></title>
+		<style type="text/css">
+			* {
+				padding: 0;
+				margin: 0;
+			}
+			
+			body{
+				background:#8bad7e;
+				font-family: Helvetica Neue,Helvetica,microsoft yahei,arial,STHeiTi,sans-serif;
+			}
+			.minPx-top{
+				border-bottom: 1px solid #fff;
+			}
+			.hot-list li {
+				display: table;
+				table-layout: fixed;
+				width: 100%;
+				height: 40px;
+				padding: 0 3%;
+				font-size: 14px;
+				background-color: hsla(0, 0%, 100%, .14);
+				box-sizing: border-box; 
+			}
+			
+			.hot-list p {
+				width: 100%;
+				display: table-cell;
+				color: #fff;
+				vertical-align: middle;
+			}
+			
+			.flip li {
+				-webkit-animation-name: d;
+				animation-name: d;
+				-webkit-animation-iteration-count: 1;
+				animation-iteration-count: 1;
+				-webkit-animation-duration: .125s;
+				animation-duration: .125s
+			}
+			
+			.flip li:nth-child(2) {
+				animation-duration: .125s;
+				-webkit-animation-duration: .125s;
+				animation-delay: .125s;
+				-webkit-animation-delay: .125s
+			}
+			
+			.flip li:nth-child(3) {
+				animation-duration: .25s;
+				-webkit-animation-duration: .25s;
+				animation-delay: .25s;
+				-webkit-animation-delay: .25s
+			}
+			
+			.flip li:nth-child(4) {
+				animation-duration: .375s;
+				-webkit-animation-duration: .375s;
+				animation-delay: .375s;
+				-webkit-animation-delay: .375s
+			}
+			
+			.flip li:nth-child(5) {
+				-webkit-animation-duration: .5s;
+				animation-delay: .5s;
+				-webkit-animation-delay: .5s
+			}
+			
+			.flip li:nth-child(6) {
+				animation-duration: .625s;
+				-webkit-animation-duration: .625s;
+				animation-delay: .625s;
+				-webkit-animation-delay: .625s
+			}
+			
+			.flip li:nth-child(7) {
+				animation-duration: .75s;
+				-webkit-animation-duration: .75s;
+				animation-delay: .75s;
+				-webkit-animation-delay: .75s
+			}
+			
+			.flip li:nth-child(8) {
+				animation-duration: .875s;
+				-webkit-animation-duration: .875s;
+				animation-delay: .875s;
+				-webkit-animation-delay: .875s
+			}
+			
+			@-webkit-keyframes d {
+				0% {
+					opacity: 0;
+					-webkit-transform: rotateX(-180deg);
+					transform: rotateX(-180deg)
+				}
+				100% {
+					opacity: 1;
+					-webkit-transform: rotateX(0deg);
+					transform: rotateX(0deg)
+				}
+			}
+			
+			
+			@media screen and (-webkit-device-pixel-ratio: 2){
+				.minPx-top{border:0;}
+				.minPx-top {
+					background-position: left bottom;
+					background-image: -webkit-gradient(linear, left bottom, left top, color-stop(0.5, #fff), color-stop(0.5, #fff));
+				}
+				.minPx-top{
+					background-repeat: repeat-x;
+					-webkit-background-size: 100% 0.33px;
+				}
+			}
+		</style>
+	</head>
+
+	<body> 
+		<ul class="hot-list flip" style="height: 581px;">
+			<li class="minPx-top">
+				<p>上海</p>
+				<p>41,983</p>
+			</li>
+			<li class="minPx-top">
+				<p>北京</p>
+				<p>39,972</p>
+			</li>
+			<li class="minPx-top">
+				<p>广州</p>
+				<p>31,125</p>
+			</li>
+			<li class="minPx-top">
+				<p>深圳</p>
+				<p>23,973</p>
+			</li>
+			<li class="minPx-top">
+				<p>武汉</p>
+				<p>23,848</p>
+			</li>
+			<li class="minPx-top">
+				<p>成都</p>
+				<p>23,114</p>
+			</li>
+			<li class="minPx-top">
+				<p>重庆</p>
+				<p>19,441</p>
+			</li>
+			<li class="minPx-top">
+				<p>杭州</p>
+				<p>16,636</p>
+			</li>
+			<li class="minPx-top">
+				<p>兰州</p>
+				<p>3,432</p>
+			</li>
+			<li class="minPx-top">
+				<p>呼和浩特</p>
+				<p>3,007</p>
+			</li>
+			 
+		</ul>
+	</body>
+
+</html>
