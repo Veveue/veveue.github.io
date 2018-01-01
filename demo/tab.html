@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+		<meta name="apple-mobile-web-app-capable" content="yes">
+		<meta name="format-detection" content="telephone=no">
+		<meta name="msapplication-tap-highlight" content="no">
+		<style type="text/css">
+			body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,input,select,textarea,div,table,td,th,tr,dt,dd,dl{margin: 0;padding: 0;font-family: Microsoft YaHei;}
+			h1,h2,h3,h4,h5,h6{font-size: 100%;font-weight: normal;}
+			nav{display: block;}
+			ul,ol{list-style: none;}
+			em,i{font-style: normal;}
+			table{border-spacing: 0;border-collapse: collapse;}
+			img{border: 0;vertical-align: middle;-webkit-touch-callout: none;}
+			input,select{display: inline-block;vertical-align: middle;font-size: 100%;line-height: 150%;}
+			a{color: #000;text-decoration: none;outline: none;background-color: transparent;-webkit-tap-highlight-color: transparent;}
+			a:hover{color: #000;}
+			dl,dt,dd,div{outline: none;}
+			.none{display: none;}
+			.hide{visibility: hidden;}
+			.visb{visibility: visible;}
+			.pa{position: absolute;}
+			@media screen and (max-width: 460px) .newsbox{ padding: 3%;}
+			.newsbox{ padding: 15px 20px 0; position: relative; overflow: hidden;}
+			.tabpart{ position: relative; z-index: 2;}
+			.tabs{ width: 100%; overflow: hidden;}
+			.newsbox .tabs li{ float: left; width: 50px;}
+			.newsbox .tabs .more-news{ position: absolute; top: 0; right: 0; width: 50px; height: 100%;}
+			.tabs a:hover, .tabs .cur{ color: #2fc3a2;}
+			.tabs a{ display: block; height: 43px; line-height: 43px; color: #414242; text-align: center;}
+			.newsbox .bdbotline{ width: 50px;}
+			.bdbotline{ position: absolute; bottom: -1px; left: 0; width: 0; height: 2px; line-height: 0; font-size: 0; background: #2fc3a2; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: left .2s ease-out 0s; transition: left .2s ease-out 0s;}
+			@media screen and (max-width: 640px) .listpart, .avfeast, .newssort, .container{ width: 100%;}
+			.listpart{ position: relative; border-top: 1px solid #e4eae9; width: 100%; height: 222px; overflow: hidden; z-index: 1;}
+			.newslists{ float: left; width: 100%; height: 100%; font-size: 13px;}
+			.newslists .nl-i{ position: relative; margin: 0 5px;}
+			.newslists .cltag{ position: absolute; top: 50%; left: 0; line-height: 100%; margin-top: -7px; color: #767676; z-index: 5;}
+			.newslists .cltit{ position: relative; display: block; padding: 3px 50px 3px 0; margin-left: 40px; color: #505050; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; z-index: 2;}
+			.newslists .cltime{ position: absolute; top: 50%; right: 0; line-height: 100%; margin-top: -6px; text-align: right; z-index: 1; color: #b1b1b1; overflow: hidden; white-space: nowrap;}
+			.listbox{ width: 100%; height: 100%;position: absolute; top: 18px; left: 0; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: all .3s ease-out 0s; transition: all .3s ease-out 0s;}
+			.main-content{ position: relative; overflow: hidden; float: left; width: 100%;height: 150px;}
+			.main-content img{ width: 100%;}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="main-content">
+			<img src="https://4img.hitv.com/preview/cms_icon/2017/12/20171227233713048.jpg_562x262_h.webp" alt="" />
+		</div>
+		<div class="newsbox">
+			<div class="tabpart" id="newstab">
+				<ul class="tabs newstabs">
+					<li>
+						<a class="cf" href="javascript:;" data-cf="0">头条</a>
+					</li>
+					<li>
+						<a class="cf" href="javascript:;" data-cf="1">新闻</a>
+					</li>
+					<li>
+						<a class="cf" href="javascript:;" data-cf="2">公告</a>
+					</li>
+					<li>
+						<a class="cf" href="javascript:;" data-cf="3">活动</a>
+					</li>
+					<li>
+						<a class="cf" href="javascript:;" data-cf="4">直播</a>
+					</li>
+					<li class="more-news">
+						<a class="morer" target="_blank">更多+</a>
+					</li>
+				</ul><em class="bdbotline"></em>
+			</div>
+			<div class="listpart">
+				<div class="listbox" id="newslist">
+					<ul class="newslists">
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">05/22</span></li>
+
+					</ul>
+					<ul class="newslists">
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">05/22</span></li>
+
+					</ul>
+					<ul class="newslists">
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">05/22</span></li>
+
+					</ul>
+					<ul class="newslists">
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">05/22</span></li>
+
+					</ul>
+					<ul class="newslists">
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
+						<li class="nl-i">
+							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">05/22</span></li>
+
+					</ul>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			function getElementsByClassName(className) {
+				if(document.getElementsByClassName) {
+					return document.getElementsByClassName(className);
+				} else {
+					var results = [],
+						elems = document.getElementsByTagName("*");
+					for(var i = 0, len = elems.length; i < len; i++) {
+						if(elems[i].className.indexOf(className) != -1) {
+							results[results.length] = elems[i];
+						}
+					}
+					return results;
+				}
+			}
+			var self = this,
+				isMobile = /Android|iPhone|iTouch|iPad|BlackBerry|IEMobile|Mobile/i.test(navigator.userAgent),
+				setCotType = isMobile ? 'touchstart' : 'click',
+				newstab = document.getElementById('newstab'),
+				cfs = getElementsByClassName('cf'),
+				line = getElementsByClassName('bdbotline')[0],
+				newslist = document.getElementById('newslist'),
+				newsbox = getElementsByClassName('newslists'),
+				boxWidth = newslist.clientWidth,
+				lineWidth = line.clientWidth,
+				cur = cfs[0];
+			cur.className += ' cur'
+
+			for(var i = 0, len = newsbox.length; i < len; i++) {
+				newsbox[i].style.width = boxWidth + 'px';
+			}
+			newslist.style.width = (boxWidth * len) + 'px';
+			var func = function(e) {
+				var e = e || window.event,
+					target = e.target || e.srcElement;
+				if("A" == target.nodeName && /\bcf\b/i.test(target.className)) {
+					n = parseInt(target.getAttribute('data-cf'));
+
+					line.style.left = lineWidth * n + 'px'
+					newslist.style.left = -(boxWidth * n) + 'px';
+
+					cur.className = cur.className.replace(/ cur/i, '');
+					cur = target;
+					cur.className += ' cur';
+				};
+			}
+			if(newstab.addEventListener) {
+				newstab.addEventListener(setCotType, func, false)
+			} else if(newstab.attachEvent) {
+				newstab.attachEvent('on' + setCotType, func)
+			}
+		}
+	</script>
+
+</html>
