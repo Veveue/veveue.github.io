@@ -9,7 +9,7 @@
 		<meta name="format-detection" content="telephone=no">
 		<meta name="msapplication-tap-highlight" content="no">
 		<style type="text/css">
-			body,h1,h2,h3,h4,h5,h6,p,ul,ol,li,input,select,textarea,div,table,td,th,tr,dt,dd,dl{margin: 0;padding: 0;font-family: Microsoft YaHei;}
+			body,a,h1,h2,h3,h4,h5,h6,p,ul,ol,li,input,select,textarea,div,table,td,th,tr,dt,dd,dl{margin: 0;padding: 0;font-family: Microsoft YaHei;}
 			h1,h2,h3,h4,h5,h6{font-size: 100%;font-weight: normal;}
 			nav{display: block;}
 			ul,ol{list-style: none;}
@@ -30,7 +30,7 @@
 			.tabs{ width: 100%; overflow: hidden;}
 			.newsbox .tabs li{ float: left; width: 50px;}
 			.newsbox .tabs .more-news{ position: absolute; top: 0; right: 0; width: 50px; height: 100%;}
-			.tabs a:hover, .tabs .cur{ color: #2fc3a2;}
+			.tabs .cur{ color: #2fc3a2;}
 			.tabs a{ display: block; height: 43px; line-height: 43px; color: #414242; text-align: center;}
 			.newsbox .bdbotline{ width: 50px;}
 			.bdbotline{ position: absolute; bottom: -1px; left: 0; width: 0; height: 2px; line-height: 0; font-size: 0; background: #2fc3a2; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: left .2s ease-out 0s; transition: left .2s ease-out 0s;}
@@ -42,7 +42,7 @@
 			.newslists .cltit{ position: relative; display: block; padding: 3px 50px 3px 0; margin-left: 40px; color: #505050; overflow: hidden; white-space: nowrap; text-overflow: ellipsis; z-index: 2;}
 			.newslists .cltime{ position: absolute; top: 50%; right: 0; line-height: 100%; margin-top: -6px; text-align: right; z-index: 1; color: #b1b1b1; overflow: hidden; white-space: nowrap;}
 			.listbox{ width: 100%; height: 100%;position: absolute; top: 18px; left: 0; -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); -webkit-transition: all .3s ease-out 0s; transition: all .3s ease-out 0s;}
-			.main-content{ position: relative; overflow: hidden; float: left; width: 100%;height: 150px;}
+			.main-content{ position: relative; overflow: hidden; float: left; width: 100%;}
 			.main-content img{ width: 100%;}
 
 		</style>
@@ -79,7 +79,7 @@
 				<div class="listbox" id="newslist">
 					<ul class="newslists">
 						<li class="nl-i">
-							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltag" href="#" target="_blank">[<i>直播1</i>]</a>
 							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
 						<li class="nl-i">
 							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
@@ -88,7 +88,7 @@
 					</ul>
 					<ul class="newslists">
 						<li class="nl-i">
-							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltag" href="#" target="_blank">[<i>直播2</i>]</a>
 							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
 						<li class="nl-i">
 							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
@@ -97,7 +97,7 @@
 					</ul>
 					<ul class="newslists">
 						<li class="nl-i">
-							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltag" href="#" target="_blank">[<i>直播3</i>]</a>
 							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
 						<li class="nl-i">
 							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
@@ -106,7 +106,7 @@
 					</ul>
 					<ul class="newslists">
 						<li class="nl-i">
-							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltag" href="#" target="_blank">[<i>直播4</i>]</a>
 							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
 						<li class="nl-i">
 							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
@@ -115,7 +115,7 @@
 					</ul>
 					<ul class="newslists">
 						<li class="nl-i">
-							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
+							<a class="cltag" href="#" target="_blank">[<i>直播5</i>]</a>
 							<a class="cltit" target="_blank" href="#">寻找最爱你的人</a><span class="cltime">06/09</span></li>
 						<li class="nl-i">
 							<a class="cltag" href="#" target="_blank">[<i>直播</i>]</a>
@@ -128,55 +128,122 @@
 	</body>
 	<script type="text/javascript">
 		window.onload = function() {
-			function getElementsByClassName(className) {
-				if(document.getElementsByClassName) {
-					return document.getElementsByClassName(className);
-				} else {
-					var results = [],
-						elems = document.getElementsByTagName("*");
-					for(var i = 0, len = elems.length; i < len; i++) {
-						if(elems[i].className.indexOf(className) != -1) {
-							results[results.length] = elems[i];
+			tabTouch.init()
+		}
+
+		function getElementsByClassName(className) {
+			if(document.getElementsByClassName) {
+				return document.getElementsByClassName(className);
+			} else {
+				var results = [],
+					elems = document.getElementsByTagName("*");
+				for(var i = 0, len = elems.length; i < len; i++) {
+					if(elems[i].className.indexOf(className) != -1) {
+						results[results.length] = elems[i];
+					}
+				}
+				return results;
+			}
+		}
+		var tabTouch = {
+			isMobile: /Android|iPhone|iTouch|iPad|BlackBerry|IEMobile|Mobile/i.test(navigator.userAgent),
+			setCotType: this.isMobile ? 'touchstart' : 'click',
+			touch: {},
+			index: 0,
+			cfs: getElementsByClassName('cf'),
+			newstab: document.getElementById('newstab'),
+			newsbox: getElementsByClassName('newslists'),
+			line: getElementsByClassName('bdbotline')[0],
+			newslist: document.getElementById('newslist'),
+			boxWidth: this.newslist.clientWidth,
+			lineWidth: getElementsByClassName('bdbotline')[0].clientWidth,
+			cur: getElementsByClassName('cf')[0],
+			touchStart: function(e) {
+				this.touch.initiated = true
+				this.touch.startX = e.touches[0].pageX
+				this.touch.endX = parseInt(this.newslist.style.left)
+				this.touch.width = this.newsbox[0].clientWidth
+			},
+			touchMove: function(e) {
+				if(!this.touch.initiated) {
+					return
+				}
+				this.touch.deltaX = parseInt(e.touches[0].pageX - this.touch.startX)
+
+				this._offset(this.touch.deltaX + this.touch.endX)
+			},
+			touchEnd: function() {
+				this.touch.initiated = false
+				if(Math.abs(this.touch.deltaX) > this.touch.width * 0.3) {
+					this.cfs[this.index].className = 'cf';
+					if(this.touch.deltaX < 0) {
+						++this.index
+						if((this.touch.endX - this.touch.width) <= -this.touch.width * (this.newsbox.length - 1)) {
+							this._offset(-this.touch.width * (this.newsbox.length - 1))
+						} else {
+							this._offset(this.touch.endX - this.touch.width)
+						}
+					} else {
+						--this.index
+						if(this.touch.endX === 0) {
+							this._offset(0)
+						} else {
+							this._offset(this.touch.endX + this.touch.width)
 						}
 					}
-					return results;
-				}
-			}
-			var self = this,
-				isMobile = /Android|iPhone|iTouch|iPad|BlackBerry|IEMobile|Mobile/i.test(navigator.userAgent),
-				setCotType = isMobile ? 'touchstart' : 'click',
-				newstab = document.getElementById('newstab'),
-				cfs = getElementsByClassName('cf'),
-				line = getElementsByClassName('bdbotline')[0],
-				newslist = document.getElementById('newslist'),
-				newsbox = getElementsByClassName('newslists'),
-				boxWidth = newslist.clientWidth,
-				lineWidth = line.clientWidth,
-				cur = cfs[0];
-			cur.className += ' cur'
 
-			for(var i = 0, len = newsbox.length; i < len; i++) {
-				newsbox[i].style.width = boxWidth + 'px';
-			}
-			newslist.style.width = (boxWidth * len) + 'px';
-			var func = function(e) {
+				} else {
+					this._offset(this.touch.endX)
+				}
+				this.cfs[this.index].className = 'cf cur';
+				this.newslist.removeEventListener('touchmove', this, false);
+				this.newslist.removeEventListener('touchend', this, false);
+			},
+			_offset: function(offsetWidth) {
+				this.newslist.style.left = offsetWidth + 'px'
+				var lineWidths = -offsetWidth / (this.touch.width / this.lineWidth)
+				if(lineWidths <= 0) {
+					this.index = 0
+					lineWidths = 0
+				} else if(lineWidths >= this.lineWidth * (this.newsbox.length - 1)) {
+					lineWidths = this.lineWidth * (this.newsbox.length - 1)
+					this.index = this.newsbox.length - 1
+				}
+
+				this.line.style.left = lineWidths + 'px'
+			},
+			func: function(e) {
 				var e = e || window.event,
 					target = e.target || e.srcElement;
 				if("A" == target.nodeName && /\bcf\b/i.test(target.className)) {
-					n = parseInt(target.getAttribute('data-cf'));
+					this.cfs[this.index].className = 'cf'
+					this.index = parseInt(target.getAttribute('data-cf'));
+					this.line.style.left = this.lineWidth * this.index + 'px'
+					this.newslist.style.left = -(this.boxWidth * this.index) + 'px';
+					this.cur = target;
+					this.cur.className = 'cf cur';
+				}
+			},
+			init: function() {
+				for(var i = 0, len = this.newsbox.length; i < len; i++) {
+					this.newsbox[i].style.width = this.boxWidth + 'px';
+				}
 
-					line.style.left = lineWidth * n + 'px'
-					newslist.style.left = -(boxWidth * n) + 'px';
-
-					cur.className = cur.className.replace(/ cur/i, '');
-					cur = target;
-					cur.className += ' cur';
-				};
-			}
-			if(newstab.addEventListener) {
-				newstab.addEventListener(setCotType, func, false)
-			} else if(newstab.attachEvent) {
-				newstab.attachEvent('on' + setCotType, func)
+				this.newslist.style.width = (this.boxWidth * len) + 'px';
+				this.newslist.style.left = '0px';
+				this.cfs[0].className += ' cur';
+				this.funcBind = this.func.bind(this)
+				if(this.newstab.addEventListener) {
+					this.newstab.addEventListener(this.setCotType, this.funcBind, false)
+				} else if(this.newstab.attachEvent) {
+					this.newstab.attachEvent('on' + this.setCotType, this.funcBind)
+				}
+				this.touchStartBind = this.touchStart.bind(this)
+				this.touchMoveBind = this.touchMove.bind(this)
+				this.touchEndBind = this.touchEnd.bind(this)
+				this.newslist.addEventListener('touchstart', this.touchStartBind, false)
+				this.newslist.addEventListener('touchmove', this.touchMoveBind, false)
+				this.newslist.addEventListener('touchend', this.touchEndBind, false)
 			}
 		}
 	</script>
