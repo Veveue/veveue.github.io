@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+		<meta name="keywords" content="梅子丹" />
+		<meta name="description" content="梅子丹" />
+		<title>in time</title>
+		<style>
+			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;user-select: none;}
+			#canvas{ position: fixed; left: -170px; bottom: -50px; transform: scale(0.5);}
+			.title{ font-family: 'Raleway', sans-serif; text-align: center;height: 100%;display: flex;}
+			.title h1{ margin: 0 auto; align-self: center;font-size: 50px;cursor: pointer;opacity: 0.6;text-shadow: 5px 5px 5px #f3d0abde;}
+			.title h1:hover{ opacity: 1;text-shadow: none}
+			.svg-wrapper{ margin: 0 auto; position: relative; width: 250px; height: 66px; display: inline-block; border-radius: 3px; align-self: center;}
+			.svg-wrapper:hover #shape{ stroke-dasharray: 85 0; stroke-width: 3px; stroke-dashoffset: 0; stroke: #000;}
+			#text{ margin-top: -72px; text-align: center;}
+			#shape{ stroke-width: 6px; fill: transparent; stroke: #009FFD; stroke-dasharray: 85 400; stroke-dashoffset: -339; transition: 1s all ease;}
+
+		</style>
+	</head>
+
+	<body>
+		<div class="title">
+			<div class="svg-wrapper">
+				<svg height="66" width="250" xmlns="http://www.w3.org/2000/svg">
+					<rect id="shape" height="66" width="250" />
+					<div id="text">
+						<h1>IN TIME</h1>
+					</div>
+				</svg>
+			</div>
+		</div>
+
+		<canvas id="canvas" width="800" height="300"></canvas>
+	</body>
+	<script type="text/javascript">
+		window.onload = function() {
+			var lze = new AudioVisualizer()
+			lze.init()
+		}
+
+		var AudioVisualizer = function() {
+			this.file = '12.mp3';
+			this.canvas = document.getElementById('canvas');
+			this.cwidth = this.canvas.width;
+			this.cheight = this.canvas.height - 2;
+			this.meterWidth = 5; //能量条的宽度
+			this.gap = 1; //能量条的间距
+			this.meterNum = 800 / (this.meterWidth + this.gap);
+		};
+		AudioVisualizer.prototype = {
+			init: function() {
+				this._loadAudio();
+			},
+			_drawzer: function(a) {
+				var atx = new AudioContext();
+				var source = null;
+				var self = this
+				atx.decodeAudioData(a, function(buffer) {
+					var analyser = atx.createAnalyser();
+					source = atx.createBufferSource();
+					source.connect(analyser);
+					analyser.connect(atx.destination);
+					source.buffer = buffer;
+					source.start(0);
+					requestAnimationFrame(function() {
+						self._drawSpectrum(analyser);
+					});
+				}, function(e) {
+					console.info('处理出错');
+				});
+			},
+			_drawSpectrum: function(analyser) {
+				var self = this
+				var ctx = self.canvas.getContext('2d');
+				var capHeight = 2,
+					capStyle = '#fff',
+					capYPositionArray = [];
+				var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+				gradient.addColorStop(1, '#0f0');
+				gradient.addColorStop(0.5, '#ff0');
+				gradient.addColorStop(0, '#f00');
+				var array = new Uint8Array(analyser.frequencyBinCount);
+				analyser.getByteFrequencyData(array);
+				var step = Math.round(array.length / self.meterNum);
+				ctx.clearRect(0, 0, self.cwidth, self.cheight);
+				for(var i = 0; i < self.meterNum; i++) {
+					var value = array[i * step];
+					if(capYPositionArray.length < Math.round(self.meterNum)) {
+						capYPositionArray.push(value);
+					}
+					ctx.fillStyle = capStyle;
+					if(value < capYPositionArray[i]) {
+						ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - (--capYPositionArray[i]), self.meterWidth, capHeight);
+					} else {
+						ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value, self.meterWidth, capHeight);
+						capYPositionArray[i] = value;
+					}
+					ctx.fillStyle = gradient;
+					ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value + capHeight, self.meterWidth, self.cheight);
+				}
+				requestAnimationFrame(function() {
+					self._drawSpectrum(analyser);
+				});
+			},
+			_loadAudio: function() {
+				var self = this;
+				var request = new XMLHttpRequest();
+				request.open('GET', this.file, true);
+				request.responseType = 'arraybuffer';
+				request.onload = function() {
+					var arraybuffer = request.response;
+					self._drawzer(arraybuffer)
+				}
+				request.send();
+			}
+		}
+	</script>
+
+</html>
