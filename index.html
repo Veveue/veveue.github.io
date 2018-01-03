@@ -37,8 +37,7 @@
 	</body>
 	<script type="text/javascript">
 		window.onload = function() {
-			var lze = new AudioVisualizer()
-			lze.init()
+			new AudioVisualizer().init()
 		}
 
 		var AudioVisualizer = function() {
@@ -49,22 +48,29 @@
 			this.meterWidth = 5; //能量条的宽度
 			this.gap = 1; //能量条的间距
 			this.meterNum = 800 / (this.meterWidth + this.gap);
+			this.btn = document.getElementById('text');
+			this.atx = new AudioContext();
+			this.request = new XMLHttpRequest();
+			this.flg = true;
 		};
 		AudioVisualizer.prototype = {
 			init: function() {
 				this._loadAudio();
 			},
 			_drawzer: function(a) {
-				var atx = new AudioContext();
 				var source = null;
 				var self = this
-				atx.decodeAudioData(a, function(buffer) {
-					var analyser = atx.createAnalyser();
-					source = atx.createBufferSource();
+				self.atx.decodeAudioData(a, function(buffer) {
+					var analyser = self.atx.createAnalyser();
+					source = self.atx.createBufferSource();
 					source.connect(analyser);
-					analyser.connect(atx.destination);
+					analyser.connect(self.atx.destination);
 					source.buffer = buffer;
 					source.start(0);
+					self.btn.addEventListener('click', function() {
+						source.stop(0);
+						self._loadAudio();
+					}, false)
 					requestAnimationFrame(function() {
 						self._drawSpectrum(analyser);
 					});
@@ -73,12 +79,12 @@
 				});
 			},
 			_drawSpectrum: function(analyser) {
-				var self = this
-				var ctx = self.canvas.getContext('2d');
-				var capHeight = 2,
+				var self = this,
+					capHeight = 2,
 					capStyle = '#fff',
-					capYPositionArray = [];
-				var gradient = ctx.createLinearGradient(0, 0, 0, 300);
+					capYPositionArray = [],
+					ctx = self.canvas.getContext('2d'),
+					gradient = ctx.createLinearGradient(0, 0, 0, 300);
 				gradient.addColorStop(1, '#0f0');
 				gradient.addColorStop(0.5, '#ff0');
 				gradient.addColorStop(0, '#f00');
@@ -107,14 +113,19 @@
 			},
 			_loadAudio: function() {
 				var self = this;
-				var request = new XMLHttpRequest();
-				request.open('GET', this.file, true);
-				request.responseType = 'arraybuffer';
-				request.onload = function() {
-					var arraybuffer = request.response;
-					self._drawzer(arraybuffer)
+				if(self.flg) {
+					self.flg = false
+					self.request.open('GET', this.file, true);
+					self.request.responseType = 'arraybuffer';
+					self.request.onload = function() {
+						setTimeout(function() {
+							self.flg = true
+						}, 800)
+						var arraybuffer = self.request.response;
+						self._drawzer(arraybuffer)
+					}
+					self.request.send();
 				}
-				request.send();
 			}
 		}
 	</script>
