@@ -9,14 +9,17 @@
 		<title>in time</title>
 		<style>
 			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;user-select: none;}
+			a{text-decoration: none;color: #fff;}
 			#canvas{ position: fixed; left: -170px; bottom: -50px; transform: scale(0.5);}
 			.title{ font-family: 'Raleway', sans-serif; text-align: center;height: 100%;display: flex;}
 			.title h1{ margin: 0 auto; align-self: center;font-size: 50px;cursor: pointer;opacity: 0.6;text-shadow: 5px 5px 5px #f3d0abde;}
 			.title h1:hover{ opacity: 1;text-shadow: none}
+			.title h1:active{ color: orangered;}
 			.svg-wrapper{ margin: 0 auto; position: relative; width: 250px; height: 66px; display: inline-block; border-radius: 3px; align-self: center;}
 			.svg-wrapper:hover #shape{ stroke-dasharray: 85 0; stroke-width: 3px; stroke-dashoffset: 0; stroke: #000;}
 			#text{ margin-top: -72px; text-align: center;}
 			#shape{ stroke-width: 6px; fill: transparent; stroke: #009FFD; stroke-dasharray: 85 400; stroke-dashoffset: -339; transition: 1s all ease;}
+			.before{ align-self: flex-end; font-family: fantasy;padding: 5px;}
 
 		</style>
 	</head>
@@ -31,8 +34,11 @@
 					</div>
 				</svg>
 			</div>
-		</div>
 
+			<div class="before">
+				<a href="http://veveue.com/index-v1.html">before</a>
+			</div>
+		</div>
 		<canvas id="canvas" width="800" height="300"></canvas>
 	</body>
 	<script type="text/javascript">
@@ -69,6 +75,7 @@
 					source.start(0);
 					self.btn.addEventListener('click', function() {
 						source.stop(0);
+						self.file = 'http://ohjr3xer5.bkt.clouddn.com/11.mp3';
 						self._loadAudio();
 					}, false)
 					requestAnimationFrame(function() {
