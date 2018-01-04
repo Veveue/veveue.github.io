@@ -4,13 +4,14 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
+		<meta name="renderer" content="webkit">
 		<meta name="keywords" content="梅子丹" />
 		<meta name="description" content="梅子丹" />
 		<title>in time</title>
 		<style>
 			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;user-select: none;}
 			a{text-decoration: none;color: #fff;}
-			#canvas{ position: fixed; left: -170px; bottom: -50px; transform: scale(0.5);}
+			#canvas{ position: fixed; left: -5%; bottom: -1%; transform: scale(0.7);}
 			.title{ text-align: center;height: 100%;display: flex;}
 			.title h1{ margin: 0 auto; align-self: center;font-size: 50px;cursor: pointer;opacity: 0.6; font-family: Comic Sans MS; -moz-text-shadow: 5px 5px 5px #f3d0ab; -webkit-text-shadow: 5px 5px 5px #f3d0ab; text-shadow: 5px 5px 5px #f3d0ab; line-height: 69px; height: 69px;}
 			.title h1:hover{ opacity: 1;text-shadow: none;-moz-text-shadow: none;-webkit-text-shadow: none;}
@@ -19,7 +20,7 @@
 			.svg-wrapper:hover #shape{ stroke-dasharray: 85 0; stroke-width: 6px; stroke-dashoffset: 0; stroke: #000;}
 			#text{ margin-top: -72px; text-align: center;}
 			#shape{ stroke-width: 6px; fill: transparent; stroke: #009FFD; stroke-dasharray: 85 400; stroke-dashoffset: -339; transition: 1s all ease;}
-			.before{ align-self: flex-end; font-family: fantasy;padding: 10px 5px;}
+			.before{ position: fixed; font-family: fantasy; bottom: 10px; right: 10px;}
 
 		</style>
 	</head>
@@ -29,35 +30,48 @@
 			<div class="svg-wrapper">
 				<svg height="66" width="250" xmlns="http://www.w3.org/2000/svg">
 					<rect id="shape" height="66" width="250" />
-					<div id="text">
+					<div id="text" title="Replay">
 						<h1>IN TIME</h1>
 					</div>
 				</svg>
 			</div>
 
 			<div class="before">
-				<a href="http://veveue.com/index-v1.html">before</a>
+				<a href="#" id="before">before</a>
 			</div>
 		</div>
-		<canvas id="canvas" width="800" height="300"></canvas>
+		<canvas id="canvas" height="300"></canvas>
 	</body>
 	<script type="text/javascript">
+		window.onresize = function() {
+			location.reload()
+		}
 		window.onload = function() {
-			new AudioVisualizer().init()
+			var nextUrl = 'http://veveue.com/index-v1.html'
+			if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+				location.href = nextUrl
+			} else if(/(Android)/i.test(navigator.userAgent)) {
+				location.href = nextUrl
+			}
+			document.getElementById('before').href = nextUrl;
+			document.getElementById('canvas').width = document.body.clientWidth / 2;
+			new AudioVisualizer().init();
 		}
 
 		var AudioVisualizer = function() {
 			this.file = 'http://ohjr3xer5.bkt.clouddn.com/12.mp3';
 			this.canvas = document.getElementById('canvas');
-			this.cwidth = this.canvas.width;
+			this.ctx = this.canvas.getContext('2d');
+			this.gradient = this.ctx.createLinearGradient(0, 0, 0, 300);
+			this.cwidth = this.canvas.width / 2;
 			this.cheight = this.canvas.height - 2;
 			this.meterWidth = 5; //能量条的宽度
 			this.gap = 1; //能量条的间距
-			this.meterNum = 800 / (this.meterWidth + this.gap);
 			this.btn = document.getElementById('text');
 			this.atx = new AudioContext();
-			this.request = new XMLHttpRequest();
 			this.flg = true;
+			this.arraybuffers = null;
+			this.ctx.translate(this.cwidth, 0);
 		};
 		AudioVisualizer.prototype = {
 			init: function() {
@@ -76,62 +90,65 @@
 					self.btn.addEventListener('click', function() {
 						source.stop(0);
 						self.file = 'http://ohjr3xer5.bkt.clouddn.com/11.mp3';
-						self._loadAudio();
+						self.init();
 					}, false)
-					requestAnimationFrame(function() {
-						self._drawSpectrum(analyser);
-					});
+
+					var capYPositionArray = [];
+
+					self.gradient.addColorStop(1, '#0f0');
+					self.gradient.addColorStop(0.5, '#ff0');
+					self.gradient.addColorStop(0, '#f00');
+					self._drawSpectrum(analyser, capYPositionArray);
 				}, function(e) {
 					console.info('处理出错');
 				});
 			},
-			_drawSpectrum: function(analyser) {
+			_drawSpectrum: function(analyser, capYPositionArray) {
 				var self = this,
 					capHeight = 2,
 					capStyle = '#fff',
-					capYPositionArray = [],
-					ctx = self.canvas.getContext('2d'),
-					gradient = ctx.createLinearGradient(0, 0, 0, 300);
-				gradient.addColorStop(1, '#0f0');
-				gradient.addColorStop(0.5, '#ff0');
-				gradient.addColorStop(0, '#f00');
+					meterNum = self.cwidth / (self.meterWidth + self.gap);
 				var array = new Uint8Array(analyser.frequencyBinCount);
 				analyser.getByteFrequencyData(array);
-				var step = Math.round(array.length / self.meterNum);
-				ctx.clearRect(0, 0, self.cwidth, self.cheight);
-				for(var i = 0; i < self.meterNum; i++) {
+				var step = Math.round(array.length / meterNum);
+				self.ctx.clearRect(-self.cwidth, 0, self.cwidth * 2, self.cheight);
+				for(var i = 0; i < meterNum; i++) {
 					var value = array[i * step];
-					if(capYPositionArray.length < Math.round(self.meterNum)) {
+					if(capYPositionArray.length < Math.round(meterNum)) {
 						capYPositionArray.push(value);
 					}
-					ctx.fillStyle = capStyle;
-					if(value < capYPositionArray[i]) {
-						ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - (--capYPositionArray[i]), self.meterWidth, capHeight);
+					self.ctx.fillStyle = capStyle;
+					if((value - 0.1) < capYPositionArray[i]) {
+						self.ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - (--capYPositionArray[i]), self.meterWidth, capHeight);
+						self.ctx.fillRect(-i * (self.meterWidth + self.gap), self.cheight - (--capYPositionArray[i]), self.meterWidth, capHeight);
 					} else {
-						ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value, self.meterWidth, capHeight);
+						self.ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value, self.meterWidth, capHeight);
+						self.ctx.fillRect(-i * (self.meterWidth + self.gap), self.cheight - value, self.meterWidth, capHeight);
 						capYPositionArray[i] = value;
 					}
-					ctx.fillStyle = gradient;
-					ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value + capHeight, self.meterWidth, self.cheight);
+					self.ctx.fillStyle = self.gradient;
+					self.ctx.fillRect(i * (self.meterWidth + self.gap), self.cheight - value + capHeight, self.meterWidth, self.cheight);
+					self.ctx.fillRect(-i * (self.meterWidth + self.gap), self.cheight - value + capHeight, self.meterWidth, self.cheight);
 				}
 				requestAnimationFrame(function() {
-					self._drawSpectrum(analyser);
+					self._drawSpectrum(analyser, capYPositionArray);
 				});
 			},
 			_loadAudio: function() {
 				var self = this;
 				if(self.flg) {
 					self.flg = false
-					self.request.open('GET', this.file, true);
-					self.request.responseType = 'arraybuffer';
-					self.request.onload = function() {
+					var request = new XMLHttpRequest();
+					request.open('GET', self.file, true);
+					request.responseType = 'arraybuffer';
+					request.onload = function() {
 						setTimeout(function() {
 							self.flg = true
-						}, 800)
-						var arraybuffer = self.request.response;
+						}, 1000)
+						var arraybuffer = request.response;
 						self._drawzer(arraybuffer)
 					}
-					self.request.send();
+					request.send();
 				}
 			}
 		}
