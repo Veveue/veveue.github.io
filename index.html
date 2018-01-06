@@ -5,6 +5,7 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0">
 		<meta name="renderer" content="webkit">
+		<meta http-equiv="Cache-Control" content="max-age=7200" />
 		<meta http-equiv="x-dns-prefetch-control" content="on">
 		<meta name="baidu-site-verification" content="1NA2Ma9K9x" />
 		<meta name="keywords" content="梅子丹" />
@@ -12,7 +13,7 @@
 		<link rel="dns-prefetch" href="//veveue.github.io/">
 		<title>in time</title>
 		<style>
-			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;user-select: none;}
+			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;user-select: none;}
 			a{text-decoration: none;color: #fff;}
 			#canvas{ position: fixed; left: -5%; bottom: -1%; transform: scale(0.7);}
 			.title{ text-align: center;height: 100%;display: flex;}
@@ -23,7 +24,10 @@
 			.svg-wrapper:hover #shape{ stroke-dasharray: 85 0; stroke-width: 6px; stroke-dashoffset: 0; stroke: #000;}
 			#text{ margin-top: -72px; text-align: center;}
 			#shape{ stroke-width: 6px; fill: transparent; stroke: #009FFD; stroke-dasharray: 85 400; stroke-dashoffset: -339; transition: 1s all ease;}
-			.before{ position: fixed; font-family: fantasy; bottom: 10px; right: 10px;}
+			.before{ position: fixed; font-family: fantasy; bottom: 1%; right: 220px;}
+			#live2dcanvas{ position: fixed; bottom: 0; right: 1rem; opacity: 1; z-index: 999; pointer-events: none;}
+			@media screen and (max-width: 500px){ .title h1{ font-family: Helvetica;}
+				}
 
 		</style>
 	</head>
@@ -43,24 +47,30 @@
 				<a href="#" id="before">before</a>
 			</div>
 		</div>
+		<canvas id="live2dcanvas" width="200" height="266.6"></canvas>
 		<canvas id="canvas" height="300"></canvas>
 	</body>
+	<!--<script src="http://wechatfe.github.io/vconsole/lib/vconsole.min.js?v=3.0.0.0"></script>
+	<script type="text/javascript">
+		window.vConsole = new window.VConsole()
+	</script>-->
+	<script type="text/javascript" src="js/bundle.js?3d053df9f21c7b6d1339"></script>
 	<script type="text/javascript">
 		window.onresize = function() {
 			location.reload()
 		}
 		window.onload = function() {
 			var nextUrl = 'http://veveue.com/index-v1.html'
-			if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
-				location.href = nextUrl
-			} else if(/(Android)/i.test(navigator.userAgent)) {
-				location.href = nextUrl
-			}
+			//			if(/(iPhone|iPad|iPod|iOS)/i.test(navigator.userAgent)) {
+			//				location.href = nextUrl
+			//			} else if(/(Android)/i.test(navigator.userAgent)) {
+			//				location.href = nextUrl
+			//			}
 			document.getElementById('before').href = nextUrl;
 			document.getElementById('canvas').width = document.body.clientWidth / 2;
+			loadlive2d("live2dcanvas", '../assets/shizuku/shizuku.model.json', 2, 0.5, 0.8, 1);
 			new AudioVisualizer().init();
 		}
-
 		var AudioVisualizer = function() {
 			this.file = 'http://ohjr3xer5.bkt.clouddn.com/12.mp3';
 			this.canvas = document.getElementById('canvas');
@@ -70,8 +80,18 @@
 			this.cheight = this.canvas.height - 2;
 			this.meterWidth = 5; //能量条的宽度
 			this.gap = 1; //能量条的间距
-			this.btn = document.getElementById('text');
-			this.atx = new AudioContext();
+			this.btn = document.getElementById('text');　
+			try {
+				this.atx = new AudioContext();　　
+			} catch(error) {
+				var audio = document.createElement('audio');
+				audio.src = 'http://ohjr3xer5.bkt.clouddn.com/12.mp3';
+				audio.play();
+				document.addEventListener('touchstart', function() {
+					audio.play();
+				}, false);　　
+				return false
+			}
 			this.flg = true;
 			this.arraybuffers = null;
 			this.ctx.translate(this.cwidth, 0);
@@ -95,9 +115,7 @@
 						self.file = 'http://ohjr3xer5.bkt.clouddn.com/11.mp3';
 						self.init();
 					}, false)
-
 					var capYPositionArray = [];
-
 					self.gradient.addColorStop(1, '#0f0');
 					self.gradient.addColorStop(0.5, '#ff0');
 					self.gradient.addColorStop(0, '#f00');
