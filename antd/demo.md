@@ -1,3 +1,4 @@
+```javascript
 /*
  * FormItem 渲染方法
  * */
@@ -70,3 +71,6 @@ function needRender(getFieldValue, data) {
   }
   return needRender;
 }
+
+
+```
