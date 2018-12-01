@@ -13,7 +13,7 @@
 		<link rel="dns-prefetch" href="//veveue.github.io/">
 		<title>in time</title>
 		<style>
-			html,body{ background: url(http://ohjr3xer5.bkt.clouddn.com/timg.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;user-select: none;}
+			html,body{ background: url(./img/0.jpg) no-repeat; background-size: cover; padding: 0; margin: 0;height: 100%;width: 100%;-webkit-user-select: none;-moz-user-select: none;-o-user-select: none;user-select: none;}
 			a{text-decoration: none;color: #fff;}
 			#canvas{ position: fixed; left: -5%; bottom: -1%; transform: scale(0.7);}
 			.title{ text-align: center;height: 100%;display: flex;}
@@ -72,7 +72,7 @@
 			new AudioVisualizer().init();
 		}
 		var AudioVisualizer = function() {
-			this.file = 'http://ohjr3xer5.bkt.clouddn.com/Take%20me%20hand.MP3';
+			this.file = './assets/123.m4a';
 			this.canvas = document.getElementById('canvas');
 			this.ctx = this.canvas.getContext('2d');
 			this.gradient = this.ctx.createLinearGradient(0, 0, 0, 300);
@@ -112,7 +112,7 @@
 					source.start(0);
 					self.btn.addEventListener('click', function() {
 						source.stop(0);
-						self.file = 'http://ohjr3xer5.bkt.clouddn.com/11.mp3';
+						self.file = './assets/In Time.mp3';
 						self.init();
 					}, false)
 					var capYPositionArray = [];
