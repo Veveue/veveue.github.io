@@ -1,0 +1,8 @@
+{
+  "name": "veveue",
+  "description": "veveue",
+  "main": "index.html",
+  "scripts": {
+    "build": "node wakatime.js"
+  }
+}

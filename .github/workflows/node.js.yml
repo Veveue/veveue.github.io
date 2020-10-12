@@ -1,0 +1,27 @@
+name: Node.js CI
+
+on:
+  # push:
+  schedule:
+    - cron:  '00 02 * * *'
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Use Node.js
+        uses: actions/setup-node@v1
+        with:
+          node-version: '12.x'
+      - run: npm install
+      - run: npm run build --if-present
+      - run: |
+          git config --global user.name 'Veveue'
+          git config --global user.email 'veveue@dingtalk.com'
+          git commit -am "update wakatime.md"
+          git push
+        env:
+          CI: true
