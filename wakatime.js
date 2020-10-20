@@ -78,11 +78,11 @@ async function main() {
     for (let i = 0; i < keys.length; i++) {
         const key = keys[i];
         // eslint-disable-next-line no-await-in-loop
-        const data = await requestObj(key.key).last7Days();
+        const data = await requestObj(key.key).summaries(getEndDate(),getEndDate());
         const str = fs.readFileSync(fileName, "utf8");
         fs.writeFile(
             fileName,
-            `${str} \n | ${key.name}  |  ${(data.data && data.data.best_day && data.data.best_day.text) || 0} |`,
+            `${str} \n | ${key.name}  |  ${(data.data && data.data[0].grand_total.text) || 0} |`,
             err => {
                 if (err) {
                     return console.log(err);
