@@ -82,7 +82,7 @@ async function main() {
         const str = fs.readFileSync(fileName, "utf8");
         fs.writeFile(
             fileName,
-            `${str} \n | ${key.name}  |  ${(data.data && data.data[0].grand_total.text) || 0} |`,
+            `${str} \n | ${key.name}  |  ${(data.data && data.data[0].grand_total.text.replace("hrs", "时").replace("mins", "分")) || 0} |`,
             err => {
                 if (err) {
                     return console.log(err);
